@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "680993842548",
+    "project_id": "flutter-shop-shoes",
+    "storage_bucket": "flutter-shop-shoes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:680993842548:android:9a403d8a9bceae9a33b821",
+        "android_client_info": {
+          "package_name": "com.fluttershopshoes.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "680993842548-e29g16ulr6ha9s85r21443d2i5vcfcvk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6qb8ZiKBF8HpAU4Kjnkn2fkj6FIqmAlI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "680993842548-e29g16ulr6ha9s85r21443d2i5vcfcvk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

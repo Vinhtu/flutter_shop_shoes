@@ -1,4 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shop_shoes/user/account_screen.dart';
+import 'package:flutter_shop_shoes/user/bottom_bar.dart';
+import 'package:flutter_shop_shoes/user/cart_screen.dart';
+import 'package:flutter_shop_shoes/user/checkout_screen.dart';
+import 'package:flutter_shop_shoes/user/checkout_success_screen.dart';
+import 'package:flutter_shop_shoes/user/info_screen.dart';
+import 'package:flutter_shop_shoes/user/notification_screen.dart';
+import 'package:flutter_shop_shoes/user/order_screen.dart';
+import 'package:flutter_shop_shoes/user/product_detail_screen.dart';
+import 'package:flutter_shop_shoes/user/search_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,7 +34,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: HomeScreen(),
     );
   }
 }
