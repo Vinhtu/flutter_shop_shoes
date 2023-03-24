@@ -23,40 +23,61 @@ class CartScreen extends StatelessWidget {
               shrinkWrap: true,
               // reverse: true,
               children: [
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            child: Icon(
-                              Icons.backpack,
-                              color: Colors.black,
-                              size: 24.0,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        GestureDetector(
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 300),
+                            margin: EdgeInsets.only(right: 16),
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                                color: Colors.white54,
+                                borderRadius: BorderRadius.circular(10),
+                                // border: Border.all(
+                                //     color: Colors.deepOrangeAccent,
+                                //     width: 2),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color.fromRGBO(207, 207, 207, 1)
+                                        .withOpacity(0.5),
+                                    spreadRadius: 1,
+                                    blurRadius: 1,
+                                    offset: Offset(
+                                        0, 2), // changes position of shadow
+                                  ),
+                                ]),
+                            child: Center(
+                              child: Icon(
+                                Icons.shopping_cart,
+                                color: Colors.black,
+                                size: 24.0,
+                              ),
                             ),
                           ),
-                          Text("In your cart")
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                            child: Icon(
-                              Icons.backpack,
-                              color: Colors.black,
-                              size: 24.0,
-                            ),
-                          ),
-                          Text("4"),
-                        ],
-                      )
-                    ],
-                  ),
+                        ),
+                        Text(
+                          "In Your Cart",
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black),
+                        )
+                      ],
+                    ),
+                    Text(
+                      "4",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    )
+                  ],
                 ),
                 Column(
                   children: [
                     Container(
+                        margin: EdgeInsets.only(top: 24),
                         height: 1000,
                         child: GridView.count(
                           scrollDirection: Axis.vertical,
@@ -70,8 +91,25 @@ class CartScreen extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(0),
                                 child: Container(
+                                    margin: EdgeInsets.only(bottom: 8),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white54,
+                                        borderRadius: BorderRadius.circular(10),
+                                        // border: Border.all(
+                                        //     color: Colors.deepOrangeAccent,
+                                        //     width: 2),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                Color.fromRGBO(207, 207, 207, 1)
+                                                    .withOpacity(0.5),
+                                            spreadRadius: 1,
+                                            blurRadius: 1,
+                                            offset: Offset(0,
+                                                2), // changes position of shadow
+                                          ),
+                                        ]),
                                     height: 500,
-                                    color: Colors.blue,
                                     width:
                                         MediaQuery.of(context).size.width * 1,
                                     child: Row(
@@ -80,23 +118,91 @@ class CartScreen extends StatelessWidget {
                                       children: [
                                         Row(
                                           children: [
-                                            Image.network(
-                                                "https://cf.shopee.vn/file/ab598875a876f58e66efac3cddb976ab",
-                                                height: 200,
-                                                width: 200),
-                                            Column(
-                                              children: [
-                                                Text("Ho chi minh"),
-                                                Text("Ten giay"),
-                                                Text("Ho chi minh"),
-                                                Text("Ten giay"),
-                                              ],
+                                            Container(
+                                              height: 230,
+                                              margin:
+                                                  EdgeInsets.only(right: 14),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                child: Image(
+                                                  image: NetworkImage(
+                                                      'https://cf.shopee.vn/file/ab598875a876f58e66efac3cddb976ab'),
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 8),
+                                                    child: Text(
+                                                      "Nike",
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          color: Colors.black),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 8),
+                                                    child: Text(
+                                                      "Giày nam thể thao ",
+                                                      style: TextStyle(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.black),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 8),
+                                                    child: Text(
+                                                      "5 sao",
+                                                      style: TextStyle(
+                                                          fontSize: 14,
+                                                          color: Colors.black),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 8),
+                                                    child: Text(
+                                                      "Color: White",
+                                                      style: TextStyle(
+                                                          fontSize: 14,
+                                                          color: Colors.black),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 8),
+                                                    child: Text(
+                                                      "Size: M",
+                                                      style: TextStyle(
+                                                          fontSize: 14,
+                                                          color: Colors.black),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ],
                                         ),
                                         Column(
                                           children: [
-                                            Text("Ho chi minh"),
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.location_on,
+                                                  color: Colors.black,
+                                                  size: 24.0,
+                                                ),
+                                                Text("Ho chi minh"),
+                                              ],
+                                            )
                                           ],
                                         ),
                                       ],
@@ -107,8 +213,25 @@ class CartScreen extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(0),
                                 child: Container(
+                                    margin: EdgeInsets.only(bottom: 8),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white54,
+                                        borderRadius: BorderRadius.circular(10),
+                                        // border: Border.all(
+                                        //     color: Colors.deepOrangeAccent,
+                                        //     width: 2),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                Color.fromRGBO(207, 207, 207, 1)
+                                                    .withOpacity(0.5),
+                                            spreadRadius: 1,
+                                            blurRadius: 1,
+                                            offset: Offset(0,
+                                                2), // changes position of shadow
+                                          ),
+                                        ]),
                                     height: 500,
-                                    color: Colors.blue,
                                     width:
                                         MediaQuery.of(context).size.width * 1,
                                     child: Row(
@@ -117,23 +240,91 @@ class CartScreen extends StatelessWidget {
                                       children: [
                                         Row(
                                           children: [
-                                            Image.network(
-                                                "https://cf.shopee.vn/file/ab598875a876f58e66efac3cddb976ab",
-                                                height: 200,
-                                                width: 200),
-                                            Column(
-                                              children: [
-                                                Text("Ho chi minh"),
-                                                Text("Ten giay"),
-                                                Text("Ho chi minh"),
-                                                Text("Ten giay"),
-                                              ],
+                                            Container(
+                                              height: 230,
+                                              margin:
+                                                  EdgeInsets.only(right: 14),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                child: Image(
+                                                  image: NetworkImage(
+                                                      'https://cf.shopee.vn/file/ab598875a876f58e66efac3cddb976ab'),
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 8),
+                                                    child: Text(
+                                                      "Nike",
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          color: Colors.black),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 8),
+                                                    child: Text(
+                                                      "Giày nam thể thao ",
+                                                      style: TextStyle(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.black),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 8),
+                                                    child: Text(
+                                                      "5 sao",
+                                                      style: TextStyle(
+                                                          fontSize: 14,
+                                                          color: Colors.black),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 8),
+                                                    child: Text(
+                                                      "Color: White",
+                                                      style: TextStyle(
+                                                          fontSize: 14,
+                                                          color: Colors.black),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 8),
+                                                    child: Text(
+                                                      "Size: M",
+                                                      style: TextStyle(
+                                                          fontSize: 14,
+                                                          color: Colors.black),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ],
                                         ),
                                         Column(
                                           children: [
-                                            Text("Ho chi minh"),
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.location_on,
+                                                  color: Colors.black,
+                                                  size: 24.0,
+                                                ),
+                                                Text("Ho chi minh"),
+                                              ],
+                                            )
                                           ],
                                         ),
                                       ],
@@ -144,8 +335,25 @@ class CartScreen extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(0),
                                 child: Container(
+                                    margin: EdgeInsets.only(bottom: 8),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white54,
+                                        borderRadius: BorderRadius.circular(10),
+                                        // border: Border.all(
+                                        //     color: Colors.deepOrangeAccent,
+                                        //     width: 2),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                Color.fromRGBO(207, 207, 207, 1)
+                                                    .withOpacity(0.5),
+                                            spreadRadius: 1,
+                                            blurRadius: 1,
+                                            offset: Offset(0,
+                                                2), // changes position of shadow
+                                          ),
+                                        ]),
                                     height: 500,
-                                    color: Colors.blue,
                                     width:
                                         MediaQuery.of(context).size.width * 1,
                                     child: Row(
@@ -154,23 +362,91 @@ class CartScreen extends StatelessWidget {
                                       children: [
                                         Row(
                                           children: [
-                                            Image.network(
-                                                "https://cf.shopee.vn/file/ab598875a876f58e66efac3cddb976ab",
-                                                height: 200,
-                                                width: 200),
-                                            Column(
-                                              children: [
-                                                Text("Ho chi minh"),
-                                                Text("Ten giay"),
-                                                Text("Ho chi minh"),
-                                                Text("Ten giay"),
-                                              ],
+                                            Container(
+                                              height: 230,
+                                              margin:
+                                                  EdgeInsets.only(right: 14),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                child: Image(
+                                                  image: NetworkImage(
+                                                      'https://cf.shopee.vn/file/ab598875a876f58e66efac3cddb976ab'),
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 8),
+                                                    child: Text(
+                                                      "Nike",
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          color: Colors.black),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 8),
+                                                    child: Text(
+                                                      "Giày nam thể thao ",
+                                                      style: TextStyle(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.black),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 8),
+                                                    child: Text(
+                                                      "5 sao",
+                                                      style: TextStyle(
+                                                          fontSize: 14,
+                                                          color: Colors.black),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 8),
+                                                    child: Text(
+                                                      "Color: White",
+                                                      style: TextStyle(
+                                                          fontSize: 14,
+                                                          color: Colors.black),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 8),
+                                                    child: Text(
+                                                      "Size: M",
+                                                      style: TextStyle(
+                                                          fontSize: 14,
+                                                          color: Colors.black),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ],
                                         ),
                                         Column(
                                           children: [
-                                            Text("Ho chi minh"),
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.location_on,
+                                                  color: Colors.black,
+                                                  size: 24.0,
+                                                ),
+                                                Text("Ho chi minh"),
+                                              ],
+                                            )
                                           ],
                                         ),
                                       ],
@@ -181,8 +457,25 @@ class CartScreen extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(0),
                                 child: Container(
+                                    margin: EdgeInsets.only(bottom: 8),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white54,
+                                        borderRadius: BorderRadius.circular(10),
+                                        // border: Border.all(
+                                        //     color: Colors.deepOrangeAccent,
+                                        //     width: 2),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                Color.fromRGBO(207, 207, 207, 1)
+                                                    .withOpacity(0.5),
+                                            spreadRadius: 1,
+                                            blurRadius: 1,
+                                            offset: Offset(0,
+                                                2), // changes position of shadow
+                                          ),
+                                        ]),
                                     height: 500,
-                                    color: Colors.blue,
                                     width:
                                         MediaQuery.of(context).size.width * 1,
                                     child: Row(
@@ -191,23 +484,213 @@ class CartScreen extends StatelessWidget {
                                       children: [
                                         Row(
                                           children: [
-                                            Image.network(
-                                                "https://cf.shopee.vn/file/ab598875a876f58e66efac3cddb976ab",
-                                                height: 200,
-                                                width: 200),
-                                            Column(
-                                              children: [
-                                                Text("Ho chi minh"),
-                                                Text("Ten giay"),
-                                                Text("Ho chi minh"),
-                                                Text("Ten giay"),
-                                              ],
+                                            Container(
+                                              height: 230,
+                                              margin:
+                                                  EdgeInsets.only(right: 14),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                child: Image(
+                                                  image: NetworkImage(
+                                                      'https://cf.shopee.vn/file/ab598875a876f58e66efac3cddb976ab'),
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 8),
+                                                    child: Text(
+                                                      "Nike",
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          color: Colors.black),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 8),
+                                                    child: Text(
+                                                      "Giày nam thể thao ",
+                                                      style: TextStyle(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.black),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 8),
+                                                    child: Text(
+                                                      "5 sao",
+                                                      style: TextStyle(
+                                                          fontSize: 14,
+                                                          color: Colors.black),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 8),
+                                                    child: Text(
+                                                      "Color: White",
+                                                      style: TextStyle(
+                                                          fontSize: 14,
+                                                          color: Colors.black),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 8),
+                                                    child: Text(
+                                                      "Size: M",
+                                                      style: TextStyle(
+                                                          fontSize: 14,
+                                                          color: Colors.black),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ],
                                         ),
                                         Column(
                                           children: [
-                                            Text("Ho chi minh"),
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.location_on,
+                                                  color: Colors.black,
+                                                  size: 24.0,
+                                                ),
+                                                Text("Ho chi minh"),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    )),
+                              ),
+                            ),
+                            Container(
+                              child: Padding(
+                                padding: const EdgeInsets.all(0),
+                                child: Container(
+                                    margin: EdgeInsets.only(bottom: 8),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white54,
+                                        borderRadius: BorderRadius.circular(10),
+                                        // border: Border.all(
+                                        //     color: Colors.deepOrangeAccent,
+                                        //     width: 2),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                Color.fromRGBO(207, 207, 207, 1)
+                                                    .withOpacity(0.5),
+                                            spreadRadius: 1,
+                                            blurRadius: 1,
+                                            offset: Offset(0,
+                                                2), // changes position of shadow
+                                          ),
+                                        ]),
+                                    height: 500,
+                                    width:
+                                        MediaQuery.of(context).size.width * 1,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Container(
+                                              height: 230,
+                                              margin:
+                                                  EdgeInsets.only(right: 14),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                child: Image(
+                                                  image: NetworkImage(
+                                                      'https://cf.shopee.vn/file/ab598875a876f58e66efac3cddb976ab'),
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 8),
+                                                    child: Text(
+                                                      "Nike",
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          color: Colors.black),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 8),
+                                                    child: Text(
+                                                      "Giày nam thể thao ",
+                                                      style: TextStyle(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.black),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 8),
+                                                    child: Text(
+                                                      "5 sao",
+                                                      style: TextStyle(
+                                                          fontSize: 14,
+                                                          color: Colors.black),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 8),
+                                                    child: Text(
+                                                      "Color: White",
+                                                      style: TextStyle(
+                                                          fontSize: 14,
+                                                          color: Colors.black),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 8),
+                                                    child: Text(
+                                                      "Size: M",
+                                                      style: TextStyle(
+                                                          fontSize: 14,
+                                                          color: Colors.black),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Column(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.location_on,
+                                                  color: Colors.black,
+                                                  size: 24.0,
+                                                ),
+                                                Text("Ho chi minh"),
+                                              ],
+                                            )
                                           ],
                                         ),
                                       ],
@@ -218,20 +701,25 @@ class CartScreen extends StatelessWidget {
                         )),
                   ],
                 ),
-                Center(
-                  child: Container(
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.backpack,
-                          color: Colors.black,
-                          size: 24.0,
+                Container(
+                    height: 40,
+                    margin: EdgeInsets.only(top: 40, bottom: 40),
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        shadowColor: Colors.orange,
+                        backgroundColor: Colors.orange,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
                         ),
-                        Text("Check out")
-                      ],
-                    ),
-                  ),
-                ),
+                      ),
+
+                      onPressed: () {
+                        print("You pressed Icon Elevated Button");
+                      },
+                      icon: Icon(
+                          Icons.shopping_cart), //icon data for elevated button
+                      label: Text("Check Out 1.000.000 vnd"), //label text
+                    )),
               ],
             ),
           ),

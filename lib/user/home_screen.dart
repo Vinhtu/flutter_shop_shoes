@@ -11,30 +11,6 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-// body: new Container(
-//         child: new GridView.count(
-//           crossAxisCount: 2,
-//           childAspectRatio: (itemWidth / itemHeight),
-//           controller: new ScrollController(keepScrollOffset: false),
-//           shrinkWrap: true,
-//           scrollDirection: Axis.vertical,
-//           children: widgetList.map((String value) {
-//             return new Container(
-//               color: Colors.green,
-//               margin: new EdgeInsets.all(1.0),
-//               child: new Center(
-//                 child: new Text(
-//                   value,
-//                   style: new TextStyle(
-//                     fontSize: 50.0,
-//                     color: Colors.white,
-//                   ),
-//                 ),
-//               ),
-//             );
-//           }).toList(),
-//         ),
-
 class _HomeScreenState extends State<HomeScreen> {
   List<String> items = [
     "All",
@@ -57,6 +33,15 @@ class _HomeScreenState extends State<HomeScreen> {
     'foo': true,
     'bar': false,
   };
+
+  List<String> productTopSale = [
+    "All",
+    "Giay the thao",
+    "Giay nam",
+    "Giay nu",
+    "Giay cao got",
+    "Giay boot",
+  ];
   String? selectedValue;
   int current_select = 0;
   PageController pageController = PageController(
@@ -83,17 +68,80 @@ class _HomeScreenState extends State<HomeScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Icon(
-                              Icons.backpack,
-                              color: Colors.black,
-                              size: 24.0,
+                            Row(
+                              children: [
+                                GestureDetector(
+                                  child: AnimatedContainer(
+                                    duration: const Duration(milliseconds: 300),
+                                    margin: EdgeInsets.only(right: 16),
+                                    width: 40,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white54,
+                                        borderRadius: BorderRadius.circular(10),
+                                        // border: Border.all(
+                                        //     color: Colors.deepOrangeAccent,
+                                        //     width: 2),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                Color.fromRGBO(207, 207, 207, 1)
+                                                    .withOpacity(0.5),
+                                            spreadRadius: 1,
+                                            blurRadius: 1,
+                                            offset: Offset(0,
+                                                2), // changes position of shadow
+                                          ),
+                                        ]),
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.arrow_left,
+                                        color: Colors.black,
+                                        size: 24.0,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                            Text("Home"),
-                            Icon(
-                              Icons.search,
-                              color: Colors.black,
-                              size: 24.0,
-                            )
+                            Text(
+                              "Home",
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black),
+                            ),
+                            GestureDetector(
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 300),
+                                margin: EdgeInsets.all(5),
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                    color: Colors.white54,
+                                    borderRadius: BorderRadius.circular(10),
+                                    // border: Border.all(
+                                    //     color: Colors.deepOrangeAccent,
+                                    //     width: 2),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Color.fromRGBO(207, 207, 207, 1)
+                                            .withOpacity(0.5),
+                                        spreadRadius: 1,
+                                        blurRadius: 1,
+                                        offset: Offset(
+                                            0, 2), // changes position of shadow
+                                      ),
+                                    ]),
+                                child: Center(
+                                  child: Icon(
+                                    Icons.arrow_right,
+                                    color: Colors.black,
+                                    size: 24.0,
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                         Container(
@@ -105,88 +153,133 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Column(
                               children: [
                                 TextField(
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontSize: 30),
                                   decoration: new InputDecoration(
-                                    prefixIcon: Icon(Icons.search),
+                                    enabledBorder: UnderlineInputBorder(
+                                      //<-- SEE HERE
+                                      borderSide: BorderSide(
+                                          width: 1, color: Colors.grey),
+                                    ),
+                                    // prefixIcon: Icon(Icons.search),
                                     hintText: 'Search',
-                                    enabledBorder: const OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(20.0)),
-                                      borderSide: const BorderSide(
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide:
-                                          BorderSide(color: Colors.blue),
-                                    ),
+                                    // enabledBorder: OutlineInputBorder(
+                                    //   borderRadius: BorderRadius.all(
+                                    //       Radius.circular(20.0)),
+                                    //   borderSide: BorderSide(
+                                    //       color: Colors.grey, width: 0.0),
+                                    // ),
+                                    // focusedBorder: OutlineInputBorder(
+                                    //   // borderRadius: BorderRadius.all(
+                                    //   //     Radius.circular(10.0)),
+                                    //   borderSide: BorderSide(
+                                    //       color: Colors.blue, width: 0.0),
+                                    // ),
                                   ),
                                 ),
                                 Container(
-                                  margin: const EdgeInsets.all(5),
+                                  margin: const EdgeInsets.only(
+                                      top: 16, left: 5, right: 5, bottom: 16),
                                   width: double.infinity,
                                   // height: double.infinity,
                                   child: Column(children: [
                                     SizedBox(
-                                      height: 60,
+                                      height: 48,
                                       width: double.infinity,
                                       child: ListView.builder(
                                           physics:
                                               const BouncingScrollPhysics(),
-                                          itemCount: items.length,
+                                          // itemCount: items.length,
+                                          itemCount: 6,
                                           scrollDirection: Axis.horizontal,
                                           itemBuilder: (ctx, index) {
-                                            return GestureDetector(
-                                              onTap: () {
-                                                setState(() {
-                                                  current_select = index;
-                                                  pageController
-                                                      .jumpToPage(index);
-                                                });
-                                              },
-                                              child: AnimatedContainer(
-                                                duration: const Duration(
-                                                    milliseconds: 300),
-                                                margin: EdgeInsets.all(5),
-                                                width: 80,
-                                                height: 45,
-                                                decoration: BoxDecoration(
-                                                  color: current_select == index
-                                                      ? Colors.white70
-                                                      : Colors.white54,
-                                                  borderRadius:
-                                                      current_select == index
-                                                          ? BorderRadius
-                                                              .circular(15)
-                                                          : BorderRadius
-                                                              .circular(10),
-                                                  border: current_select ==
-                                                          index
-                                                      ? Border.all(
-                                                          color: Colors
-                                                              .deepOrangeAccent,
-                                                          width: 2)
-                                                      : null,
-                                                ),
-                                                child: Center(
-                                                  child: Text(
-                                                    items[index],
-                                                    style: TextStyle(
-                                                        color: current_select ==
-                                                                index
-                                                            ? Colors.black
-                                                            : Colors.blue),
-                                                    textAlign: TextAlign.center,
+                                            return MouseRegion(
+                                              cursor: SystemMouseCursors.click,
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  setState(() {
+                                                    current_select = index;
+                                                    pageController
+                                                        .jumpToPage(index);
+                                                  });
+                                                },
+                                                child: AnimatedContainer(
+                                                  duration: const Duration(
+                                                      milliseconds: 300),
+                                                  margin: EdgeInsets.all(5),
+                                                  // width: 80,
+                                                  height: 40,
+
+                                                  padding: EdgeInsets.only(
+                                                      left: 16, right: 16),
+                                                  decoration: BoxDecoration(
+                                                    // backgroundBlendMode:,
+                                                    color:
+                                                        current_select == index
+                                                            ? Colors.white70
+                                                            : Colors.white54,
+
+                                                    borderRadius:
+                                                        current_select == index
+                                                            ? BorderRadius
+                                                                .circular(10)
+                                                            : BorderRadius
+                                                                .circular(10),
+                                                    // border: current_select ==
+                                                    //         index
+                                                    //     ? Border.all(
+                                                    //         color: Colors
+                                                    //             .deepOrangeAccent,
+                                                    //         width: 2)
+                                                    //     : null,
+                                                    boxShadow:
+                                                        current_select == index
+                                                            ? [
+                                                                BoxShadow(
+                                                                  color: Color.fromRGBO(
+                                                                          207,
+                                                                          207,
+                                                                          207,
+                                                                          1)
+                                                                      .withOpacity(
+                                                                          0.5),
+                                                                  spreadRadius:
+                                                                      1,
+                                                                  blurRadius: 1,
+                                                                  offset: Offset(
+                                                                      0,
+                                                                      2), // changes position of shadow
+                                                                ),
+                                                              ]
+                                                            : null,
+                                                  ),
+                                                  child: Center(
+                                                    child: Text(
+                                                      items[index],
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color:
+                                                              current_select ==
+                                                                      index
+                                                                  ? Colors.black
+                                                                  : Colors
+                                                                      .grey),
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
                                             );
                                           }),
                                     ),
+                                    Container(
+                                      margin: const EdgeInsets.only(top: 4),
+                                    ),
                                     Divider(),
                                     Container(
-                                      margin: const EdgeInsets.only(top: 1),
+                                      margin: const EdgeInsets.only(top: 8),
                                       width: double.infinity,
                                       height: 500,
                                       child: PageView(
@@ -208,15 +301,72 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         fit: BoxFit.fill),
                                                   ),
                                                   Container(
+                                                      margin:
+                                                          const EdgeInsets.only(
+                                                              top: 16,
+                                                              bottom: 16),
                                                       child: Column(
-                                                    children: [
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
                                                         children: [
                                                           Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
                                                             children: [
+                                                              Row(
+                                                                children: [
+                                                                  GestureDetector(
+                                                                    child:
+                                                                        AnimatedContainer(
+                                                                      duration: const Duration(
+                                                                          milliseconds:
+                                                                              300),
+                                                                      margin: EdgeInsets.only(
+                                                                          right:
+                                                                              16),
+                                                                      width: 40,
+                                                                      height:
+                                                                          40,
+                                                                      decoration: BoxDecoration(
+                                                                          color: Colors.white54,
+                                                                          borderRadius: BorderRadius.circular(10),
+                                                                          // border: Border.all(
+                                                                          //     color: Colors.deepOrangeAccent,
+                                                                          //     width: 2),
+                                                                          boxShadow: [
+                                                                            BoxShadow(
+                                                                              color: Color.fromRGBO(207, 207, 207, 1).withOpacity(0.5),
+                                                                              spreadRadius: 1,
+                                                                              blurRadius: 1,
+                                                                              offset: Offset(0, 2), // changes position of shadow
+                                                                            ),
+                                                                          ]),
+                                                                      child:
+                                                                          Center(
+                                                                        child:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .auto_graph,
+                                                                          color:
+                                                                              Colors.black,
+                                                                          size:
+                                                                              24.0,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                  Text(
+                                                                    "Top Sale",
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            14,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        color: Colors
+                                                                            .black),
+                                                                  )
+                                                                ],
+                                                              ),
                                                               GestureDetector(
                                                                 child:
                                                                     AnimatedContainer(
@@ -227,23 +377,31 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                       EdgeInsets
                                                                           .all(
                                                                               5),
-                                                                  width: 80,
-                                                                  height: 45,
+                                                                  width: 40,
+                                                                  height: 40,
                                                                   decoration: BoxDecoration(
-                                                                      color: Colors
-                                                                          .white54,
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              10),
-                                                                      border: Border.all(
-                                                                          color: Colors
-                                                                              .deepOrangeAccent,
-                                                                          width:
-                                                                              2)),
+                                                                      color: Colors.white54,
+                                                                      borderRadius: BorderRadius.circular(10),
+                                                                      // border: Border.all(
+                                                                      //     color: Colors.deepOrangeAccent,
+                                                                      //     width: 2),
+                                                                      boxShadow: [
+                                                                        BoxShadow(
+                                                                          color:
+                                                                              Color.fromRGBO(207, 207, 207, 1).withOpacity(0.5),
+                                                                          spreadRadius:
+                                                                              1,
+                                                                          blurRadius:
+                                                                              1,
+                                                                          offset: Offset(
+                                                                              0,
+                                                                              2), // changes position of shadow
+                                                                        ),
+                                                                      ]),
                                                                   child: Center(
                                                                     child: Icon(
                                                                       Icons
-                                                                          .backpack,
+                                                                          .arrow_right_outlined,
                                                                       color: Colors
                                                                           .black,
                                                                       size:
@@ -252,175 +410,258 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   ),
                                                                 ),
                                                               ),
-                                                              Text("Top Sale")
                                                             ],
-                                                          ),
-                                                          GestureDetector(
-                                                            child:
-                                                                AnimatedContainer(
-                                                              duration:
-                                                                  const Duration(
-                                                                      milliseconds:
-                                                                          300),
-                                                              margin: EdgeInsets
-                                                                  .all(5),
-                                                              width: 80,
-                                                              height: 45,
-                                                              decoration: BoxDecoration(
-                                                                  color: Colors
-                                                                      .white54,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              10),
-                                                                  border: Border.all(
-                                                                      color: Colors
-                                                                          .deepOrangeAccent,
-                                                                      width:
-                                                                          2)),
-                                                              child: Center(
-                                                                child: Icon(
-                                                                  Icons
-                                                                      .backpack,
-                                                                  color: Colors
-                                                                      .black,
-                                                                  size: 24.0,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  )),
-                                                  Container(
-                                                      height: 1000,
-                                                      child: GridView.count(
-                                                        scrollDirection:
-                                                            Axis.vertical,
-                                                        primary: false,
-                                                        crossAxisSpacing: 10,
-                                                        mainAxisSpacing: 10,
-                                                        crossAxisCount: 2,
-                                                        childAspectRatio:
-                                                            (1 / 1.4),
-                                                        children: <Widget>[
-                                                          Center(
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(0),
-                                                              child: Container(
-                                                                  height: 500,
-                                                                  color: Colors
-                                                                      .blue,
-                                                                  width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width *
-                                                                      1,
-                                                                  child: Column(
-                                                                    children: [
-                                                                      Image.network(
-                                                                          "https://cf.shopee.vn/file/ab598875a876f58e66efac3cddb976ab",
-                                                                          height:
-                                                                              200,
-                                                                          width:
-                                                                              double.maxFinite),
-                                                                      Text(
-                                                                          "Ho chi minh"),
-                                                                      Text(
-                                                                          "Ten giay"),
-                                                                      Row(
-                                                                        children: [
-                                                                          Text(
-                                                                              "10.000vnd"),
-                                                                          Text(
-                                                                              "20.000vnd")
-                                                                        ],
-                                                                      )
-                                                                    ],
-                                                                  )),
-                                                            ),
-                                                          ),
-                                                          Container(
-                                                            height: 250,
-                                                            color: Colors
-                                                                .teal[200],
-                                                            child: const Text(
-                                                                'Heed not the rabble'),
-                                                          ),
-                                                          Container(
-                                                            height: 250,
-                                                            color: Colors
-                                                                .teal[200],
-                                                            child: const Text(
-                                                                'Heed not the rabble'),
-                                                          ),
-                                                          Container(
-                                                            height: 250,
-                                                            color: Colors
-                                                                .teal[200],
-                                                            child: const Text(
-                                                                'Heed not the rabble'),
-                                                          ),
-                                                          Container(
-                                                            height: 250,
-                                                            color: Colors
-                                                                .teal[200],
-                                                            child: const Text(
-                                                                'Heed not the rabble'),
-                                                          ),
-                                                          Container(
-                                                            height: 250,
-                                                            color: Colors
-                                                                .teal[200],
-                                                            child: const Text(
-                                                                'Heed not the rabble'),
                                                           ),
                                                         ],
                                                       )),
                                                   Container(
-                                                    height: 120,
-                                                    margin:
-                                                        const EdgeInsets.only(
-                                                            bottom: 16.0),
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            16.0),
-                                                    decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(16),
-                                                        color: Colors.orange),
-                                                    child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          Icon(
-                                                            Icons.backpack,
-                                                            color: Colors.black,
-                                                            size: 24.0,
+                                                      height: 1000,
+                                                      child: GridView.builder(
+                                                        itemCount:
+                                                            productTopSale
+                                                                .length,
+                                                        scrollDirection:
+                                                            Axis.vertical,
+                                                        primary: false,
+                                                        gridDelegate:
+                                                            SliverGridDelegateWithFixedCrossAxisCount(
+                                                          crossAxisSpacing: 10,
+                                                          mainAxisSpacing: 10,
+                                                          crossAxisCount: 2,
+                                                          childAspectRatio:
+                                                              (1 / 1.4),
+                                                        ),
+                                                        itemBuilder:
+                                                            (context, index) =>
+                                                                Container(
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(0),
+                                                            child: Container(
+                                                                height: 500,
+                                                                decoration: BoxDecoration(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            10),
+                                                                    boxShadow: [
+                                                                      BoxShadow(
+                                                                        color: Color.fromRGBO(
+                                                                                207,
+                                                                                207,
+                                                                                207,
+                                                                                1)
+                                                                            .withOpacity(0.5),
+                                                                        spreadRadius:
+                                                                            1,
+                                                                        blurRadius:
+                                                                            1,
+                                                                        offset: Offset(
+                                                                            0,
+                                                                            2), // changes position of shadow
+                                                                      ),
+                                                                    ]),
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width *
+                                                                    1,
+                                                                child: Column(
+                                                                  children: [
+                                                                    // Image
+                                                                    //     .network(
+                                                                    //   "https://cf.shopee.vn/file/ab598875a876f58e66efac3cddb976ab",
+                                                                    //   height:
+                                                                    //       230,
+                                                                    //   width: double
+                                                                    //       .maxFinite,
+                                                                    // ),
+                                                                    Container(
+                                                                      height:
+                                                                          230,
+                                                                      child:
+                                                                          ClipRRect(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(10),
+                                                                        child:
+                                                                            Image(
+                                                                          image:
+                                                                              NetworkImage('https://cf.shopee.vn/file/ab598875a876f58e66efac3cddb976ab'),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+
+                                                                    Container(
+                                                                        margin: EdgeInsets.only(
+                                                                            left:
+                                                                                4,
+                                                                            bottom:
+                                                                                4),
+                                                                        child:
+                                                                            Row(
+                                                                          children: [
+                                                                            Text(
+                                                                              "Ho chi minh",
+                                                                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+                                                                            ),
+                                                                          ],
+                                                                        )),
+
+                                                                    Container(
+                                                                        margin: EdgeInsets.only(
+                                                                            left:
+                                                                                4,
+                                                                            bottom:
+                                                                                8),
+                                                                        child:
+                                                                            Row(
+                                                                          children: [
+                                                                            Text(
+                                                                              "Giay nam the thao",
+                                                                              style: TextStyle(fontSize: 14, color: Colors.black),
+                                                                            ),
+                                                                          ],
+                                                                        )),
+
+                                                                    Container(
+                                                                        margin: EdgeInsets.only(
+                                                                            left:
+                                                                                4),
+                                                                        child:
+                                                                            Row(
+                                                                          children: [
+                                                                            Text(
+                                                                              "10.000vnd",
+                                                                              style: TextStyle(fontSize: 16, color: Colors.grey),
+                                                                            ),
+                                                                            Text(
+                                                                              "-",
+                                                                              style: TextStyle(fontSize: 16, color: Colors.grey),
+                                                                            ),
+                                                                            Text(
+                                                                              "20.000vnd",
+                                                                              style: TextStyle(fontSize: 16, color: Colors.grey, decoration: TextDecoration.underline),
+                                                                            )
+                                                                          ],
+                                                                        )),
+                                                                  ],
+                                                                )),
                                                           ),
-                                                          Text("Free ship"),
-                                                          Icon(
-                                                            Icons.search,
-                                                            color: Colors.black,
-                                                            size: 24.0,
-                                                          )
-                                                        ]),
+                                                        ),
+                                                      )),
+                                                  // Container(
+                                                  //   height: 120,
+                                                  //   margin:
+                                                  //       const EdgeInsets.only(
+                                                  //           bottom: 16.0),
+                                                  //   padding:
+                                                  //       const EdgeInsets.all(
+                                                  //           16.0),
+                                                  //   decoration: BoxDecoration(
+                                                  //       borderRadius:
+                                                  //           BorderRadius
+                                                  //               .circular(16),
+                                                  //       color: Colors.orange),
+                                                  //   child: Row(
+                                                  //       mainAxisAlignment:
+                                                  //           MainAxisAlignment
+                                                  //               .spaceBetween,
+                                                  //       children: [
+                                                  //         Icon(
+                                                  //           Icons.backpack,
+                                                  //           color: Colors.black,
+                                                  //           size: 24.0,
+                                                  //         ),
+                                                  //         Text("Free ship"),
+                                                  //         Icon(
+                                                  //           Icons.search,
+                                                  //           color: Colors.black,
+                                                  //           size: 24.0,
+                                                  //         )
+                                                  //       ]),
+                                                  // ),
+
+//hinh anh banner 2
+                                                  ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                      Radius.circular(8.0),
+                                                    ),
+                                                    child: Image.network(
+                                                        'https://lh3.googleusercontent.com/p/AF1QipN-LJfCDc518VQfaiIEX--iKNjiFl1kMksJMfft=w1080-h608-p-no-v0',
+                                                        width: double.infinity,
+                                                        height: 150,
+                                                        fit: BoxFit.fill),
                                                   ),
                                                   Container(
+                                                      margin:
+                                                          const EdgeInsets.only(
+                                                              top: 16,
+                                                              bottom: 16),
                                                       child: Column(
-                                                    children: [
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
                                                         children: [
                                                           Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
                                                             children: [
+                                                              Row(
+                                                                children: [
+                                                                  GestureDetector(
+                                                                    child:
+                                                                        AnimatedContainer(
+                                                                      duration: const Duration(
+                                                                          milliseconds:
+                                                                              300),
+                                                                      margin: EdgeInsets.only(
+                                                                          right:
+                                                                              16),
+                                                                      width: 40,
+                                                                      height:
+                                                                          40,
+                                                                      decoration: BoxDecoration(
+                                                                          color: Colors.white54,
+                                                                          borderRadius: BorderRadius.circular(10),
+                                                                          // border: Border.all(
+                                                                          //     color: Colors.deepOrangeAccent,
+                                                                          //     width: 2),
+                                                                          boxShadow: [
+                                                                            BoxShadow(
+                                                                              color: Color.fromRGBO(207, 207, 207, 1).withOpacity(0.5),
+                                                                              spreadRadius: 1,
+                                                                              blurRadius: 1,
+                                                                              offset: Offset(0, 2), // changes position of shadow
+                                                                            ),
+                                                                          ]),
+                                                                      child:
+                                                                          Center(
+                                                                        child:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .ac_unit,
+                                                                          color:
+                                                                              Colors.black,
+                                                                          size:
+                                                                              24.0,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                  Text(
+                                                                    "Recommendation Product",
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            14,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        color: Colors
+                                                                            .black),
+                                                                  )
+                                                                ],
+                                                              ),
                                                               GestureDetector(
                                                                 child:
                                                                     AnimatedContainer(
@@ -431,23 +672,31 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                       EdgeInsets
                                                                           .all(
                                                                               5),
-                                                                  width: 80,
-                                                                  height: 45,
+                                                                  width: 40,
+                                                                  height: 40,
                                                                   decoration: BoxDecoration(
-                                                                      color: Colors
-                                                                          .white54,
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              10),
-                                                                      border: Border.all(
-                                                                          color: Colors
-                                                                              .deepOrangeAccent,
-                                                                          width:
-                                                                              2)),
+                                                                      color: Colors.white54,
+                                                                      borderRadius: BorderRadius.circular(10),
+                                                                      // border: Border.all(
+                                                                      //     color: Colors.deepOrangeAccent,
+                                                                      //     width: 2),
+                                                                      boxShadow: [
+                                                                        BoxShadow(
+                                                                          color:
+                                                                              Color.fromRGBO(207, 207, 207, 1).withOpacity(0.5),
+                                                                          spreadRadius:
+                                                                              1,
+                                                                          blurRadius:
+                                                                              1,
+                                                                          offset: Offset(
+                                                                              0,
+                                                                              2), // changes position of shadow
+                                                                        ),
+                                                                      ]),
                                                                   child: Center(
                                                                     child: Icon(
                                                                       Icons
-                                                                          .backpack,
+                                                                          .arrow_right,
                                                                       color: Colors
                                                                           .black,
                                                                       size:
@@ -456,133 +705,146 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   ),
                                                                 ),
                                                               ),
-                                                              Text("Top Sale")
                                                             ],
                                                           ),
-                                                          GestureDetector(
-                                                            child:
-                                                                AnimatedContainer(
-                                                              duration:
-                                                                  const Duration(
-                                                                      milliseconds:
-                                                                          300),
-                                                              margin: EdgeInsets
-                                                                  .all(5),
-                                                              width: 80,
-                                                              height: 45,
-                                                              decoration: BoxDecoration(
-                                                                  color: Colors
-                                                                      .white54,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              10),
-                                                                  border: Border.all(
-                                                                      color: Colors
-                                                                          .deepOrangeAccent,
-                                                                      width:
-                                                                          2)),
-                                                              child: Center(
-                                                                child: Icon(
-                                                                  Icons
-                                                                      .backpack,
-                                                                  color: Colors
-                                                                      .black,
-                                                                  size: 24.0,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
                                                         ],
-                                                      ),
-                                                    ],
-                                                  )),
+                                                      )),
                                                   Container(
                                                       height: 1000,
-                                                      child: GridView.count(
+                                                      child: GridView.builder(
+                                                        itemCount:
+                                                            productTopSale
+                                                                .length,
                                                         scrollDirection:
                                                             Axis.vertical,
                                                         primary: false,
-                                                        crossAxisSpacing: 10,
-                                                        mainAxisSpacing: 10,
-                                                        crossAxisCount: 2,
-                                                        childAspectRatio:
-                                                            (1 / 1.4),
-                                                        children: <Widget>[
-                                                          Center(
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(0),
-                                                              child: Container(
-                                                                  height: 500,
-                                                                  color: Colors
-                                                                      .blue,
-                                                                  width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width *
-                                                                      1,
-                                                                  child: Column(
-                                                                    children: [
-                                                                      Image.network(
-                                                                          "https://cf.shopee.vn/file/ab598875a876f58e66efac3cddb976ab",
-                                                                          height:
-                                                                              200,
-                                                                          width:
-                                                                              double.maxFinite),
-                                                                      Text(
-                                                                          "Ho chi minh"),
-                                                                      Text(
-                                                                          "Ten giay"),
-                                                                      Row(
-                                                                        children: [
-                                                                          Text(
-                                                                              "10.000vnd"),
-                                                                          Text(
-                                                                              "20.000vnd")
-                                                                        ],
-                                                                      )
-                                                                    ],
-                                                                  )),
-                                                            ),
+                                                        gridDelegate:
+                                                            SliverGridDelegateWithFixedCrossAxisCount(
+                                                          crossAxisSpacing: 10,
+                                                          mainAxisSpacing: 10,
+                                                          crossAxisCount: 2,
+                                                          childAspectRatio:
+                                                              (1 / 1.4),
+                                                        ),
+                                                        itemBuilder:
+                                                            (context, index) =>
+                                                                Container(
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(0),
+                                                            child: Container(
+                                                                height: 500,
+                                                                decoration: BoxDecoration(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            10),
+                                                                    boxShadow: [
+                                                                      BoxShadow(
+                                                                        color: Color.fromRGBO(
+                                                                                207,
+                                                                                207,
+                                                                                207,
+                                                                                1)
+                                                                            .withOpacity(0.5),
+                                                                        spreadRadius:
+                                                                            1,
+                                                                        blurRadius:
+                                                                            1,
+                                                                        offset: Offset(
+                                                                            0,
+                                                                            2), // changes position of shadow
+                                                                      ),
+                                                                    ]),
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width *
+                                                                    1,
+                                                                child: Column(
+                                                                  children: [
+                                                                    // Image
+                                                                    //     .network(
+                                                                    //   "https://cf.shopee.vn/file/ab598875a876f58e66efac3cddb976ab",
+                                                                    //   height:
+                                                                    //       230,
+                                                                    //   width: double
+                                                                    //       .maxFinite,
+                                                                    // ),
+                                                                    Container(
+                                                                      height:
+                                                                          230,
+                                                                      child:
+                                                                          ClipRRect(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(10),
+                                                                        child:
+                                                                            Image(
+                                                                          image:
+                                                                              NetworkImage('https://cf.shopee.vn/file/ab598875a876f58e66efac3cddb976ab'),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+
+                                                                    Container(
+                                                                        margin: EdgeInsets.only(
+                                                                            left:
+                                                                                4,
+                                                                            bottom:
+                                                                                4),
+                                                                        child:
+                                                                            Row(
+                                                                          children: [
+                                                                            Text(
+                                                                              "Ho chi minh",
+                                                                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+                                                                            ),
+                                                                          ],
+                                                                        )),
+
+                                                                    Container(
+                                                                        margin: EdgeInsets.only(
+                                                                            left:
+                                                                                4,
+                                                                            bottom:
+                                                                                8),
+                                                                        child:
+                                                                            Row(
+                                                                          children: [
+                                                                            Text(
+                                                                              "Giay nam the thao",
+                                                                              style: TextStyle(fontSize: 14, color: Colors.black),
+                                                                            ),
+                                                                          ],
+                                                                        )),
+
+                                                                    Container(
+                                                                        margin: EdgeInsets.only(
+                                                                            left:
+                                                                                4),
+                                                                        child:
+                                                                            Row(
+                                                                          children: [
+                                                                            Text(
+                                                                              "10.000vnd",
+                                                                              style: TextStyle(fontSize: 16, color: Colors.grey),
+                                                                            ),
+                                                                            Text(
+                                                                              "-",
+                                                                              style: TextStyle(fontSize: 16, color: Colors.grey),
+                                                                            ),
+                                                                            Text(
+                                                                              "20.000vnd",
+                                                                              style: TextStyle(fontSize: 16, color: Colors.grey, decoration: TextDecoration.underline),
+                                                                            )
+                                                                          ],
+                                                                        )),
+                                                                  ],
+                                                                )),
                                                           ),
-                                                          Container(
-                                                            height: 250,
-                                                            color: Colors
-                                                                .teal[200],
-                                                            child: const Text(
-                                                                'Heed not the rabble'),
-                                                          ),
-                                                          Container(
-                                                            height: 250,
-                                                            color: Colors
-                                                                .teal[200],
-                                                            child: const Text(
-                                                                'Heed not the rabble'),
-                                                          ),
-                                                          Container(
-                                                            height: 250,
-                                                            color: Colors
-                                                                .teal[200],
-                                                            child: const Text(
-                                                                'Heed not the rabble'),
-                                                          ),
-                                                          Container(
-                                                            height: 250,
-                                                            color: Colors
-                                                                .teal[200],
-                                                            child: const Text(
-                                                                'Heed not the rabble'),
-                                                          ),
-                                                          Container(
-                                                            height: 250,
-                                                            color: Colors
-                                                                .teal[200],
-                                                            child: const Text(
-                                                                'Heed not the rabble'),
-                                                          ),
-                                                        ],
+                                                        ),
                                                       )),
                                                 ],
                                               ),
@@ -802,6 +1064,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           ],
                                                         ),
                                                         Container(
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                                    top: 16),
                                                             height: 1000,
                                                             child:
                                                                 GridView.count(
@@ -825,104 +1090,182 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                             .all(0),
                                                                     child: Container(
                                                                         height: 500,
-                                                                        color: Colors.blue,
+                                                                        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), boxShadow: [
+                                                                          BoxShadow(
+                                                                            color:
+                                                                                Color.fromRGBO(207, 207, 207, 1).withOpacity(0.5),
+                                                                            spreadRadius:
+                                                                                1,
+                                                                            blurRadius:
+                                                                                1,
+                                                                            offset:
+                                                                                Offset(0, 2), // changes position of shadow
+                                                                          ),
+                                                                        ]),
                                                                         width: MediaQuery.of(context).size.width * 1,
                                                                         child: Column(
                                                                           children: [
-                                                                            Image.network("https://cf.shopee.vn/file/ab598875a876f58e66efac3cddb976ab",
-                                                                                height: 200,
-                                                                                width: double.maxFinite),
-                                                                            Text("Ho chi minh"),
-                                                                            Text("Ten giay"),
-                                                                            Row(
-                                                                              children: [
-                                                                                Text("10.000vnd"),
-                                                                                Text("20.000vnd")
-                                                                              ],
-                                                                            )
+                                                                            // Image
+                                                                            //     .network(
+                                                                            //   "https://cf.shopee.vn/file/ab598875a876f58e66efac3cddb976ab",
+                                                                            //   height:
+                                                                            //       230,
+                                                                            //   width: double
+                                                                            //       .maxFinite,
+                                                                            // ),
+                                                                            Container(
+                                                                              height: 230,
+                                                                              child: ClipRRect(
+                                                                                borderRadius: BorderRadius.circular(10),
+                                                                                child: Image(
+                                                                                  image: NetworkImage('https://cf.shopee.vn/file/ab598875a876f58e66efac3cddb976ab'),
+                                                                                ),
+                                                                              ),
+                                                                            ),
+
+                                                                            Container(
+                                                                                margin: EdgeInsets.only(left: 4, bottom: 4),
+                                                                                child: Row(
+                                                                                  children: [
+                                                                                    Text(
+                                                                                      "Ho chi minh",
+                                                                                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+                                                                                    ),
+                                                                                  ],
+                                                                                )),
+
+                                                                            Container(
+                                                                                margin: EdgeInsets.only(left: 4, bottom: 8),
+                                                                                child: Row(
+                                                                                  children: [
+                                                                                    Text(
+                                                                                      "Giay nam the thao",
+                                                                                      style: TextStyle(fontSize: 14, color: Colors.black),
+                                                                                    ),
+                                                                                  ],
+                                                                                )),
+
+                                                                            Container(
+                                                                                margin: EdgeInsets.only(left: 4),
+                                                                                child: Row(
+                                                                                  children: [
+                                                                                    Text(
+                                                                                      "10.000vnd",
+                                                                                      style: TextStyle(fontSize: 16, color: Colors.grey),
+                                                                                    ),
+                                                                                    Text(
+                                                                                      "-",
+                                                                                      style: TextStyle(fontSize: 16, color: Colors.grey),
+                                                                                    ),
+                                                                                    Text(
+                                                                                      "20.000vnd",
+                                                                                      style: TextStyle(fontSize: 16, color: Colors.grey, decoration: TextDecoration.underline),
+                                                                                    )
+                                                                                  ],
+                                                                                )),
                                                                           ],
                                                                         )),
                                                                   ),
                                                                 ),
-                                                                Container(
-                                                                  height: 250,
-                                                                  color: Colors
-                                                                          .teal[
-                                                                      200],
-                                                                  child: const Text(
-                                                                      'Heed not the rabble'),
-                                                                ),
-                                                                Container(
-                                                                  height: 250,
-                                                                  color: Colors
-                                                                          .teal[
-                                                                      200],
-                                                                  child: const Text(
-                                                                      'Heed not the rabble'),
-                                                                ),
-                                                                Container(
-                                                                  height: 250,
-                                                                  color: Colors
-                                                                          .teal[
-                                                                      200],
-                                                                  child: const Text(
-                                                                      'Heed not the rabble'),
-                                                                ),
-                                                                Container(
-                                                                  height: 250,
-                                                                  color: Colors
-                                                                          .teal[
-                                                                      200],
-                                                                  child: const Text(
-                                                                      'Heed not the rabble'),
-                                                                ),
-                                                                Container(
-                                                                  height: 250,
-                                                                  color: Colors
-                                                                          .teal[
-                                                                      200],
-                                                                  child: const Text(
-                                                                      'Heed not the rabble'),
+                                                                Center(
+                                                                  child:
+                                                                      Padding(
+                                                                    padding:
+                                                                        const EdgeInsets
+                                                                            .all(0),
+                                                                    child: Container(
+                                                                        height: 500,
+                                                                        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), boxShadow: [
+                                                                          BoxShadow(
+                                                                            color:
+                                                                                Color.fromRGBO(207, 207, 207, 1).withOpacity(0.5),
+                                                                            spreadRadius:
+                                                                                1,
+                                                                            blurRadius:
+                                                                                1,
+                                                                            offset:
+                                                                                Offset(0, 2), // changes position of shadow
+                                                                          ),
+                                                                        ]),
+                                                                        width: MediaQuery.of(context).size.width * 1,
+                                                                        child: Column(
+                                                                          children: [
+                                                                            // Image
+                                                                            //     .network(
+                                                                            //   "https://cf.shopee.vn/file/ab598875a876f58e66efac3cddb976ab",
+                                                                            //   height:
+                                                                            //       230,
+                                                                            //   width: double
+                                                                            //       .maxFinite,
+                                                                            // ),
+                                                                            Container(
+                                                                              height: 230,
+                                                                              child: ClipRRect(
+                                                                                borderRadius: BorderRadius.circular(10),
+                                                                                child: Image(
+                                                                                  image: NetworkImage('https://cf.shopee.vn/file/ab598875a876f58e66efac3cddb976ab'),
+                                                                                ),
+                                                                              ),
+                                                                            ),
+
+                                                                            Container(
+                                                                                margin: EdgeInsets.only(left: 4, bottom: 4),
+                                                                                child: Row(
+                                                                                  children: [
+                                                                                    Text(
+                                                                                      "Ho chi minh",
+                                                                                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+                                                                                    ),
+                                                                                  ],
+                                                                                )),
+
+                                                                            Container(
+                                                                                margin: EdgeInsets.only(left: 4, bottom: 8),
+                                                                                child: Row(
+                                                                                  children: [
+                                                                                    Text(
+                                                                                      "Giay nam the thao",
+                                                                                      style: TextStyle(fontSize: 14, color: Colors.black),
+                                                                                    ),
+                                                                                  ],
+                                                                                )),
+
+                                                                            Container(
+                                                                                margin: EdgeInsets.only(left: 4),
+                                                                                child: Row(
+                                                                                  children: [
+                                                                                    Text(
+                                                                                      "10.000vnd",
+                                                                                      style: TextStyle(fontSize: 16, color: Colors.grey),
+                                                                                    ),
+                                                                                    Text(
+                                                                                      "-",
+                                                                                      style: TextStyle(fontSize: 16, color: Colors.grey),
+                                                                                    ),
+                                                                                    Text(
+                                                                                      "20.000vnd",
+                                                                                      style: TextStyle(fontSize: 16, color: Colors.grey, decoration: TextDecoration.underline),
+                                                                                    )
+                                                                                  ],
+                                                                                )),
+                                                                          ],
+                                                                        )),
+                                                                  ),
                                                                 ),
                                                               ],
                                                             )),
-                                                        Container(
-                                                          height: 120,
-                                                          margin:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  bottom: 16.0),
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(16.0),
-                                                          decoration: BoxDecoration(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          16),
-                                                              color: Colors
-                                                                  .orange),
-                                                          child: Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Icon(
-                                                                  Icons
-                                                                      .backpack,
-                                                                  color: Colors
-                                                                      .black,
-                                                                  size: 24.0,
-                                                                ),
-                                                                Text(
-                                                                    "Free ship"),
-                                                                Icon(
-                                                                  Icons.search,
-                                                                  color: Colors
-                                                                      .black,
-                                                                  size: 24.0,
-                                                                )
-                                                              ]),
+                                                        ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                            Radius.circular(
+                                                                8.0),
+                                                          ),
+                                                          child: Image.network(
+                                                              'https://lh3.googleusercontent.com/p/AF1QipN-LJfCDc518VQfaiIEX--iKNjiFl1kMksJMfft=w1080-h608-p-no-v0',
+                                                              width: double
+                                                                  .infinity,
+                                                              height: 150,
+                                                              fit: BoxFit.fill),
                                                         ),
                                                       ],
                                                     ),

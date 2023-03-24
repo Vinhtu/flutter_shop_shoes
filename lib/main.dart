@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_shop_shoes/user/account_screen.dart';
 import 'package:flutter_shop_shoes/user/bottom_bar.dart';
 import 'package:flutter_shop_shoes/user/cart_screen.dart';
+import 'package:flutter_shop_shoes/user/checkout_fail_screen%20copy.dart';
 import 'package:flutter_shop_shoes/user/checkout_screen.dart';
 import 'package:flutter_shop_shoes/user/checkout_success_screen.dart';
 import 'package:flutter_shop_shoes/user/info_screen.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_shop_shoes/user/notification_screen.dart';
 import 'package:flutter_shop_shoes/user/order_screen.dart';
 import 'package:flutter_shop_shoes/user/product_detail_screen.dart';
 import 'package:flutter_shop_shoes/user/search_screen.dart';
+import 'package:flutter_shop_shoes/user/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
