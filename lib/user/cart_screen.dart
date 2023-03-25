@@ -137,11 +137,16 @@ class CartScreen extends StatelessWidget {
                                                   Container(
                                                     margin: EdgeInsets.only(
                                                         bottom: 8),
-                                                    child: Text(
-                                                      "Nike",
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          color: Colors.black),
+                                                    child: Row(
+                                                      children: [
+                                                        Text(
+                                                          "Nike",
+                                                          style: TextStyle(
+                                                              fontSize: 12,
+                                                              color:
+                                                                  Colors.black),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
                                                   Container(

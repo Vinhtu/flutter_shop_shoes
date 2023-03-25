@@ -25,9 +25,9 @@ class _HomeScreenState extends State<HomeScreen> {
     "Giay boot",
   ];
   final List<String> itemss = [
-    'Bình thuong',
-    'Tu cao den thap',
-    'Tu thap den cao',
+    'Bình Thường',
+    'Từ cao đến thấp',
+    'Từ thấp đến cao',
   ];
   Map<String, bool> values = {
     'foo': true,
@@ -1319,56 +1319,159 @@ class _HomeScreenState extends State<HomeScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Lua chon'),
+          title: const Text('Filter'),
           content: Container(
+              width: 500,
               child: Column(
-            children: <Widget>[
-              SizedBox(
-                width: 10,
-              ),
-              Text(
-                'Brand',
-                style: TextStyle(fontSize: 20.0),
-              ),
-              CheckboxListTile(
-                secondary: const Icon(Icons.alarm),
-                title: const Text('Nike'),
-                subtitle: Text('Nike'),
-                value: valuefirst,
-                onChanged: (value) {
-                  setState(() {
-                    valuefirst == value;
-                  });
-                },
-              ),
-              CheckboxListTile(
-                controlAffinity: ListTileControlAffinity.trailing,
-                secondary: const Icon(Icons.alarm),
-                title: const Text('Adidas'),
-                subtitle: Text('Adidas'),
-                value: valuesecond,
-                onChanged: (value) {
-                  setState(() {
-                    valuesecond == value;
-                  });
-                },
-              ),
-              Text(
-                'Money',
-                style: TextStyle(fontSize: 20.0),
-              ),
-              Text(
-                'Dia chi',
-                style: TextStyle(fontSize: 20.0),
-              ),
-            ],
-          )),
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(bottom: 16),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Brand ',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(fontSize: 14.0),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Nike",
+                        style: TextStyle(fontSize: 14.0),
+                      ),
+                      Transform.scale(
+                        scale: .7,
+                        child:
+                            Checkbox(value: valuefirst, onChanged: (value) {}),
+                      ),
+                    ],
+                  ),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Convert",
+                        style: TextStyle(fontSize: 14.0),
+                      ),
+                      Transform.scale(
+                        scale: .7,
+                        child:
+                            Checkbox(value: valuefirst, onChanged: (value) {}),
+                      )
+                    ],
+                  ),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Jordan",
+                        style: TextStyle(fontSize: 14.0),
+                      ),
+                      Transform.scale(
+                        scale: .7,
+                        child:
+                            Checkbox(value: valuefirst, onChanged: (value) {}),
+                      )
+                    ],
+                  ),
+
+                  Container(
+                    margin: EdgeInsets.only(bottom: 16, top: 24),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Address ',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(fontSize: 14.0),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Tp Hồ Chí Minh",
+                        style: TextStyle(fontSize: 14.0),
+                      ),
+                      Transform.scale(
+                        scale: .7,
+                        child:
+                            Checkbox(value: valuefirst, onChanged: (value) {}),
+                      ),
+                    ],
+                  ),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Hà Nội",
+                        style: TextStyle(fontSize: 14.0),
+                      ),
+                      Transform.scale(
+                        scale: .7,
+                        child:
+                            Checkbox(value: valuefirst, onChanged: (value) {}),
+                      )
+                    ],
+                  ),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Đà Nẵng",
+                        style: TextStyle(fontSize: 14.0),
+                      ),
+                      Transform.scale(
+                        scale: .7,
+                        child:
+                            Checkbox(value: valuefirst, onChanged: (value) {}),
+                      )
+                    ],
+                  ),
+                  // CheckboxListTile(
+                  //   contentPadding:
+                  //       EdgeInsets.only(left: 0, right: 0, bottom: 0),
+
+                  //   // secondary: const Icon(Icons.alarm),
+                  //   title: const Text('Nike'),
+                  //   // subtitle: Text('Nike'),
+                  //   value: valuefirst,
+                  //   onChanged: (value) {
+                  //     setState(() {
+                  //       valuefirst == value;
+                  //     });
+                  //   },
+                  // ),
+                  // CheckboxListTile(
+                  //   contentPadding: EdgeInsets.only(left: 0, right: 0),
+                  //   controlAffinity: ListTileControlAffinity.trailing,
+                  //   // secondary: const Icon(Icons.alarm),
+                  //   title: const Text('Adidas'),
+                  //   // subtitle: Text('Adidas'),
+                  //   value: valuesecond,
+                  //   onChanged: (value) {
+                  //     setState(() {
+                  //       valuesecond == value;
+                  //     });
+                  //   },
+                  // ),
+                ],
+              )),
           actions: <Widget>[
             TextButton(
               style: TextButton.styleFrom(
                 textStyle: Theme.of(context).textTheme.labelLarge,
               ),
-              child: const Text('Disable'),
+              child: const Text('Huỷ'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -1377,7 +1480,7 @@ class _HomeScreenState extends State<HomeScreen> {
               style: TextButton.styleFrom(
                 textStyle: Theme.of(context).textTheme.labelLarge,
               ),
-              child: const Text('Enable'),
+              child: const Text('Tim kiếm'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
