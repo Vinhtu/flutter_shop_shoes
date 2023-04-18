@@ -1,8 +1,48 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter_shop_shoes/service/product_service.dart';
+import 'package:flutter_shop_shoes/user/product_detail_screen.dart';
+import 'package:get/get.dart';
+
+import '../model/product_model.dart';
+
+// class Record {
+//   final String id;
+//   final String name;
+//   final String thumbnail;
+//   final String price;
+//   final String color;
+//   final String size;
+
+//   final DocumentReference reference;
+//   Record.fromSnapshot(DocumentSnapshot snapshot)
+//       : this.fromMap(
+//           snapshot.data() as Map<dynamic, dynamic>,
+//           reference: snapshot.reference,
+//         );
+
+//   Record.fromMap(
+//     Map<dynamic, dynamic> map, {
+//     required this.reference,
+//   })  : assert(map['id'] != null),
+//         assert(map['name'] != null),
+//         assert(map['thumbnail'] != null),
+//         assert(map['price'] != null),
+//         assert(map['color'] != null),
+//         assert(map['size'] != null),
+//         id = map['id'],
+//         name = map['name'],
+//         thumbnail = map['thumbnail'],
+//         price = map['price'],
+//         color = map['color'],
+//         size = map['size'];
+//   @override
+//   String toString() => "Record<$name:$name>";
+// }
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,17 +52,34 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  ProductService productService = ProductService();
+  // Future<List<ProductModel>>? productList;
+  List<ProductModel>? retrievedProductList;
+
+  @override
+  void initState() {
+    super.initState();
+    _initRetrieval();
+  }
+
+  Future<void> _initRetrieval() async {
+    // productList =
+    //     productService.retrieveProduct() as Future<List<ProductModel>>?;
+    retrievedProductList =
+        (await productService.retrieveProduct()).cast<ProductModel>();
+  }
+
   List<String> items = [
     "All",
-    "Giay the thao",
-    "Giay nam",
-    "Giay nu",
-    "Giay cao got",
-    "Giay boot",
-    "Giay nam",
-    "Giay nu",
-    "Giay cao got",
-    "Giay boot",
+    "Giày thể thao",
+    "Giày nam",
+    "Giày nữ",
+    "Giày cao gót",
+    "Giày boot",
+    "Giày nam",
+    "Giày nữ",
+    "Giày cao gót",
+    "Giày boot",
   ];
   final List<String> itemss = [
     'Bình Thường',
@@ -48,6 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
     initialPage: 0,
     keepPage: true,
   );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -417,6 +475,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   Container(
                                                       height: 1000,
                                                       child: GridView.builder(
+                                                        // itemCount:
+                                                        //     retrievedProductList!
+                                                        //         .length,
                                                         itemCount:
                                                             productTopSale
                                                                 .length,
@@ -503,27 +564,29 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                             Row(
                                                                           children: [
                                                                             Text(
-                                                                              "Ho chi minh",
-                                                                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+                                                                              "Hồ Chí Minh",
+                                                                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
                                                                             ),
                                                                           ],
                                                                         )),
-
-                                                                    Container(
-                                                                        margin: EdgeInsets.only(
-                                                                            left:
-                                                                                4,
-                                                                            bottom:
-                                                                                8),
-                                                                        child:
-                                                                            Row(
-                                                                          children: [
-                                                                            Text(
-                                                                              "Giay nam the thao",
-                                                                              style: TextStyle(fontSize: 14, color: Colors.black),
-                                                                            ),
-                                                                          ],
-                                                                        )),
+                                                                    GestureDetector(
+                                                                      onTap:
+                                                                          () {
+                                                                        Navigator.push(
+                                                                            context,
+                                                                            MaterialPageRoute(builder: (context) => ProductDetailScreen()));
+                                                                      },
+                                                                      child: Container(
+                                                                          margin: EdgeInsets.only(left: 4, bottom: 8),
+                                                                          child: Row(
+                                                                            children: [
+                                                                              Text(
+                                                                                "Giày nam thể thao",
+                                                                                style: TextStyle(fontSize: 14, color: Colors.black),
+                                                                              ),
+                                                                            ],
+                                                                          )),
+                                                                    ),
 
                                                                     Container(
                                                                         margin: EdgeInsets.only(
@@ -798,27 +861,30 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                             Row(
                                                                           children: [
                                                                             Text(
-                                                                              "Ho chi minh",
-                                                                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+                                                                              "Hồ Chí Minh",
+                                                                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
                                                                             ),
                                                                           ],
                                                                         )),
 
-                                                                    Container(
-                                                                        margin: EdgeInsets.only(
-                                                                            left:
-                                                                                4,
-                                                                            bottom:
-                                                                                8),
-                                                                        child:
-                                                                            Row(
-                                                                          children: [
-                                                                            Text(
-                                                                              "Giay nam the thao",
-                                                                              style: TextStyle(fontSize: 14, color: Colors.black),
-                                                                            ),
-                                                                          ],
-                                                                        )),
+                                                                    GestureDetector(
+                                                                      onTap:
+                                                                          () {
+                                                                        Navigator.push(
+                                                                            context,
+                                                                            MaterialPageRoute(builder: (context) => ProductDetailScreen()));
+                                                                      },
+                                                                      child: Container(
+                                                                          margin: EdgeInsets.only(left: 4, bottom: 8),
+                                                                          child: Row(
+                                                                            children: [
+                                                                              Text(
+                                                                                "Giay nam the thao",
+                                                                                style: TextStyle(fontSize: 14, color: Colors.black),
+                                                                              ),
+                                                                            ],
+                                                                          )),
+                                                                    ),
 
                                                                     Container(
                                                                         margin: EdgeInsets.only(
@@ -1331,7 +1397,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         Text(
                           'Brand ',
                           textAlign: TextAlign.left,
-                          style: TextStyle(fontSize: 14.0),
+                          style: TextStyle(
+                              fontSize: 14.0, fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -1388,7 +1455,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         Text(
                           'Address ',
                           textAlign: TextAlign.left,
-                          style: TextStyle(fontSize: 14.0),
+                          style: TextStyle(
+                              fontSize: 14.0, fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),

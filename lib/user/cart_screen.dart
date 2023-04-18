@@ -137,18 +137,78 @@ class CartScreen extends StatelessWidget {
                                                   Container(
                                                     margin: EdgeInsets.only(
                                                         bottom: 8),
-                                                    child: Row(
-                                                      children: [
-                                                        Text(
-                                                          "Nike",
-                                                          style: TextStyle(
-                                                              fontSize: 12,
-                                                              color:
-                                                                  Colors.black),
-                                                        ),
-                                                      ],
+                                                    child: Align(
+                                                      alignment:
+                                                          Alignment.topRight,
+                                                      child: Text(
+                                                        "Nike",
+                                                        style: TextStyle(
+                                                            fontSize: 12,
+                                                            color:
+                                                                Colors.black),
+                                                      ),
                                                     ),
                                                   ),
+                                                  // Container(
+                                                  //   margin: EdgeInsets.only(
+                                                  //       bottom: 8),
+                                                  //   child: Align(
+                                                  //     alignment:
+                                                  //         Alignment.topRight,
+                                                  //     child: Text(
+                                                  //       "Giày nam thể thao",
+                                                  //       style: TextStyle(
+                                                  //           fontSize: 12,
+                                                  //           color:
+                                                  //               Colors.black),
+                                                  //     ),
+                                                  //   ),
+                                                  // ),
+                                                  //  Container(
+                                                  //   margin: EdgeInsets.only(
+                                                  //       bottom: 8),
+                                                  //   child: Align(
+                                                  //     alignment:
+                                                  //         Alignment.topRight,
+                                                  //     child: Text(
+                                                  //       "5 sao",
+                                                  //       style: TextStyle(
+                                                  //           fontSize: 12,
+                                                  //           color:
+                                                  //               Colors.black),
+                                                  //     ),
+                                                  //   ),
+                                                  // ),
+                                                  // Container(
+                                                  //   margin: EdgeInsets.only(
+                                                  //       bottom: 8),
+                                                  //   child: Align(
+                                                  //     alignment:
+                                                  //         Alignment.topRight,
+                                                  //     child: Text(
+                                                  //       "Color: White",
+                                                  //       style: TextStyle(
+                                                  //           fontSize: 12,
+                                                  //           color:
+                                                  //               Colors.black),
+                                                  //     ),
+                                                  //   ),
+                                                  // ),
+                                                  // Container(
+                                                  //   margin: EdgeInsets.only(
+                                                  //       bottom: 8),
+                                                  //   child: Align(
+                                                  //     alignment:
+                                                  //         Alignment.topRight,
+                                                  //     child: Text(
+                                                  //       "Color: White",
+                                                  //       style: TextStyle(
+                                                  //           fontSize: 12,
+                                                  //           color:
+                                                  //               Colors.black),
+                                                  //     ),
+                                                  //   ),
+                                                  // ),
                                                   Container(
                                                     margin: EdgeInsets.only(
                                                         bottom: 8),

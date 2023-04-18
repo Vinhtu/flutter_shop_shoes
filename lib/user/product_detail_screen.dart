@@ -1,15 +1,38 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter/src/widgets/framework.dart';
 // import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:accordion/accordion.dart';
 
-class ProductDetailScreen extends StatelessWidget {
+class ProductDetailScreen extends StatefulWidget {
+  ProductDetailScreen({super.key});
+
+  @override
+  State<ProductDetailScreen> createState() => _ProductDetailScreenState();
+}
+
+class _ProductDetailScreenState extends State<ProductDetailScreen> {
   List<String> images = [
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTIZccfNPnqalhrWev-Xo7uBhkor57_rKbkw&usqp=CAU",
     "https://wallpaperaccess.com/full/2637581.jpg"
   ];
 
-  ProductDetailScreen({super.key});
+  final _headerStyle = const TextStyle(
+      color: Color(0xffffffff), fontSize: 15, fontWeight: FontWeight.bold);
 
+  final _contentStyleHeader = const TextStyle(
+      color: Color(0xff999999), fontSize: 14, fontWeight: FontWeight.w700);
+
+  final _contentStyle = const TextStyle(
+      color: Color(0xff999999), fontSize: 14, fontWeight: FontWeight.normal);
+
+  final _loremIpsum =
+      '''Lorem ipsum is typically a corrupted version of 'De finibus bonorum et malorum', a 1st century BC text by the Roman statesman and philosopher Cicero, with words altered, added, and removed to make it nonsensical and improper Latin.''';
+
+  bool boolDescription = false;
+  bool boolRating = false;
+  bool boolComment = false;
+
+  //  void changeBoolDescription() {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,6 +109,274 @@ class ProductDetailScreen extends StatelessWidget {
                     Text(
                         "Giày Đá Banh Sân Cỏ Nhân Tạo được thiết kế từ cao su cao cấp, bề mặt bằng da nhân tạo cho độ bám sàn tốt cũng như có độ bền cùng độ dẻo dai cao, là chọn lựa lý tưởng của những bạn nam yêu thích thể thao. Đặc biệt, thiết kế chủ đạo màu đen chuối nỏi bật, bắt mắt cùng logo ấn tượng, làm toát lên phong cách mạnh mẽ của cầu thủ sân cỏ")
                   ],
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.only(top: 16),
+                  width: double.infinity,
+                  child: Center(
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(children: [
+                        MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: GestureDetector(
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 300),
+                              margin: EdgeInsets.only(right: 16),
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                color: Colors.orange,
+                                borderRadius: BorderRadius.circular(40),
+                                border: Border.all(color: Colors.red, width: 1),
+                                // boxShadow: [
+                                //   BoxShadow(
+                                //     color: Color.fromRGBO(207, 207, 207, 1)
+                                //         .withOpacity(0.5),
+                                //     spreadRadius: 1,
+                                //     blurRadius: 1,
+                                //     offset: Offset(
+                                //         0, 2), // changes position of shadow
+                                //   ),
+                                // ]
+                              ),
+                              // child: Center(
+                              //   child: Icon(
+                              //     Icons.auto_graph,
+                              //     color: Colors.black,
+                              //     size: 24.0,
+                              //   ),
+                              // ),
+                            ),
+                          ),
+                        ),
+                        MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: GestureDetector(
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 300),
+                              margin: EdgeInsets.only(right: 16),
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  color: Colors.green,
+                                  borderRadius: BorderRadius.circular(40),
+                                  // border: Border.all(
+                                  //     color: Colors.deepOrangeAccent, width: 1),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromRGBO(207, 207, 207, 1)
+                                          .withOpacity(0.5),
+                                      spreadRadius: 1,
+                                      blurRadius: 1,
+                                      offset: Offset(
+                                          0, 2), // changes position of shadow
+                                    ),
+                                  ]),
+                              // child: Center(
+                              //   child: Icon(
+                              //     Icons.auto_graph,
+                              //     color: Colors.black,
+                              //     size: 24.0,
+                              //   ),
+                              // ),
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 300),
+                            margin: EdgeInsets.only(right: 16),
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                                color: Colors.green,
+                                borderRadius: BorderRadius.circular(40),
+                                // border: Border.all(
+                                //     color: Colors.deepOrangeAccent,
+                                //     width: 2),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color.fromRGBO(207, 207, 207, 1)
+                                        .withOpacity(0.5),
+                                    spreadRadius: 1,
+                                    blurRadius: 1,
+                                    offset: Offset(
+                                        0, 2), // changes position of shadow
+                                  ),
+                                ]),
+                            // child: Center(
+                            //   child: Icon(
+                            //     Icons.auto_graph,
+                            //     color: Colors.black,
+                            //     size: 24.0,
+                            //   ),
+                            // ),
+                          ),
+                        ),
+                        GestureDetector(
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 300),
+                            margin: EdgeInsets.only(right: 16),
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(40),
+                                // border: Border.all(
+                                //     color: Colors.deepOrangeAccent,
+                                //     width: 2),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color.fromRGBO(207, 207, 207, 1)
+                                        .withOpacity(0.5),
+                                    spreadRadius: 1,
+                                    blurRadius: 1,
+                                    offset: Offset(
+                                        0, 2), // changes position of shadow
+                                  ),
+                                ]),
+                            // child: Center(child: Text("39")),
+                          ),
+                        ),
+                      ]),
+                    ),
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.only(top: 16),
+                  child: Center(
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(children: [
+                        MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: GestureDetector(
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 300),
+                              margin: EdgeInsets.only(right: 16),
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(color: Colors.red, width: 1),
+                                // boxShadow: [
+                                //   BoxShadow(
+                                //     color: Color.fromRGBO(207, 207, 207, 1)
+                                //         .withOpacity(0.5),
+                                //     spreadRadius: 1,
+                                //     blurRadius: 1,
+                                //     offset: Offset(
+                                //         0, 2), // changes position of shadow
+                                //   ),
+                                // ]
+                              ),
+                              child: Center(child: Text("39")),
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 300),
+                            margin: EdgeInsets.only(right: 16),
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                border:
+                                    Border.all(color: Colors.grey, width: 1),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color.fromRGBO(207, 207, 207, 1)
+                                        .withOpacity(0.5),
+                                    spreadRadius: 1,
+                                    blurRadius: 1,
+                                    offset: Offset(
+                                        0, 2), // changes position of shadow
+                                  ),
+                                ]),
+                            child: Center(child: Text("40")),
+                          ),
+                        ),
+                        GestureDetector(
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 300),
+                            margin: EdgeInsets.only(right: 16),
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                border:
+                                    Border.all(color: Colors.grey, width: 1),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color.fromRGBO(207, 207, 207, 1)
+                                        .withOpacity(0.5),
+                                    spreadRadius: 1,
+                                    blurRadius: 1,
+                                    offset: Offset(
+                                        0, 2), // changes position of shadow
+                                  ),
+                                ]),
+                            child: Center(child: Text("41")),
+                          ),
+                        ),
+                        GestureDetector(
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 300),
+                            margin: EdgeInsets.only(right: 16),
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                border:
+                                    Border.all(color: Colors.grey, width: 1),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color.fromRGBO(207, 207, 207, 1)
+                                        .withOpacity(0.5),
+                                    spreadRadius: 1,
+                                    blurRadius: 1,
+                                    offset: Offset(
+                                        0, 2), // changes position of shadow
+                                  ),
+                                ]),
+                            child: Center(child: Text("42")),
+                          ),
+                        ),
+                        GestureDetector(
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 300),
+                            margin: EdgeInsets.only(right: 16),
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                border:
+                                    Border.all(color: Colors.grey, width: 1),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color.fromRGBO(207, 207, 207, 1)
+                                        .withOpacity(0.5),
+                                    spreadRadius: 1,
+                                    blurRadius: 1,
+                                    offset: Offset(
+                                        0, 2), // changes position of shadow
+                                  ),
+                                ]),
+                            child: Center(child: Text("43")),
+                          ),
+                        ),
+                      ]),
+                    ),
+                  ),
                 ),
                 Container(
                   margin: EdgeInsets.only(top: 16),
@@ -207,6 +498,15 @@ class ProductDetailScreen extends StatelessWidget {
                   ),
                 ),
                 Container(
+                  child: Column(children: [
+                    Container(
+                      child: Row(
+                        children: [],
+                      ),
+                    )
+                  ]),
+                ),
+                Container(
                     height: 40,
                     margin: EdgeInsets.only(top: 40, bottom: 40),
                     child: ElevatedButton.icon(
@@ -223,15 +523,214 @@ class ProductDetailScreen extends StatelessWidget {
                           Icons.shopping_cart), //icon data for elevated button
                       label: Text("Add to cart"), //label text
                     )),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                // Accordion(
+                //     maxOpenSections: 2,
+                //     headerBackgroundColorOpened: Colors.white,
+                //     scaleWhenAnimating: true,
+                //     openAndCloseAnimation: true,
+                //     headerPadding:
+                //         const EdgeInsets.symmetric(vertical: 7, horizontal: 15),
+                //     // sectionOpeningHapticFeedback: SectionHapticFeedback.heavy,
+                //     // sectionClosingHapticFeedback: SectionHapticFeedback.light,
+                //     children: [
+                //       AccordionSection(
+                //         isOpen: true,
+                //         leftIcon: const Icon(Icons.compare_rounded,
+                //             color: Colors.white),
+                //         header:
+                //             Text('Description Product', style: _headerStyle),
+                //         contentBorderColor: const Color(0xffffffff),
+                //         headerBackgroundColorOpened: Colors.amber,
+                //         content: Text("dafs"),
+                //       ),
+                //     ]),
+                // Accordion(
+                //     maxOpenSections: 2,
+                //     headerBackgroundColorOpened: Colors.white,
+                //     scaleWhenAnimating: true,
+                //     openAndCloseAnimation: true,
+                //     headerPadding:
+                //         const EdgeInsets.symmetric(vertical: 7, horizontal: 15),
+                //     // sectionOpeningHapticFeedback: SectionHapticFeedback.heavy,
+                //     // sectionClosingHapticFeedback: SectionHapticFeedback.light,
+                //     children: [
+                //       AccordionSection(
+                //         isOpen: true,
+                //         leftIcon: const Icon(Icons.compare_rounded,
+                //             color: Colors.white),
+                //         header: Text('Rating Product', style: _headerStyle),
+                //         contentBorderColor: const Color(0xffffffff),
+                //         headerBackgroundColorOpened: Colors.amber,
+                //         content: Text("dafs"),
+                //       ),
+                //     ]),
+                // Accordion(
+                //     maxOpenSections: 2,
+                //     headerBackgroundColorOpened: Colors.black54,
+                //     scaleWhenAnimating: true,
+                //     openAndCloseAnimation: true,
+                //     headerPadding:
+                //         const EdgeInsets.symmetric(vertical: 7, horizontal: 15),
+                //     // sectionOpeningHapticFeedback: SectionHapticFeedback.heavy,
+                //     // sectionClosingHapticFeedback: SectionHapticFeedback.light,
+                //     children: [
+                //       AccordionSection(
+                //         isOpen: true,
+                //         leftIcon: const Icon(Icons.compare_rounded,
+                //             color: Colors.white),
+                //         header: Text('Comment Product', style: _headerStyle),
+                //         contentBorderColor: const Color(0xffffffff),
+                //         headerBackgroundColorOpened: Colors.amber,
+                //         content: Text("dafs"),
+                //       ),
+                //     ]),
+                Column(children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          GestureDetector(
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 300),
+                              margin: EdgeInsets.only(right: 16),
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  color: Colors.white54,
+                                  borderRadius: BorderRadius.circular(10),
+                                  // border: Border.all(
+                                  //     color: Colors.deepOrangeAccent,
+                                  //     width: 2),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromRGBO(207, 207, 207, 1)
+                                          .withOpacity(0.5),
+                                      spreadRadius: 1,
+                                      blurRadius: 1,
+                                      offset: Offset(
+                                          0, 2), // changes position of shadow
+                                    ),
+                                  ]),
+                              child: Center(
+                                child: Icon(
+                                  Icons.description_outlined,
+                                  color: Colors.black,
+                                  size: 24.0,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Text(
+                            "Description product",
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                          )
+                        ],
+                      ),
+                      GestureDetector(
+                        onTap: () async {
+                          setState(() {
+                            boolDescription = !boolDescription;
+                          });
+                        },
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
+                          margin: EdgeInsets.all(5),
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                              color: Colors.white54,
+                              borderRadius: BorderRadius.circular(10),
+                              // border: Border.all(
+                              //     color: Colors.deepOrangeAccent,
+                              //     width: 2),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color.fromRGBO(207, 207, 207, 1)
+                                      .withOpacity(0.5),
+                                  spreadRadius: 1,
+                                  blurRadius: 1,
+                                  offset: Offset(
+                                      0, 2), // changes position of shadow
+                                ),
+                              ]),
+                          child: Center(
+                            child: Icon(
+                              Icons.arrow_right_outlined,
+                              color: Colors.black,
+                              size: 24.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(
+                        top: boolDescription ? 16 : 0,
+                        bottom: boolDescription ? 16 : 0),
+                    child: Column(children: [
+                      Text(boolDescription
+                          ? "Giày Đá Banh Sân Cỏ Nhân Tạo được thiết kế từ cao su cao cấp, bề mặt bằng da nhân tạo cho độ bám sàn tốt cũng như có độ bền cùng độ dẻo dai cao, là chọn lựa lý tưởng của những bạn nam yêu thích thể thao. Đặc biệt, thiết kế chủ đạo màu đen chuối nỏi bật, bắt mắt cùng logo ấn tượng, làm toát lên phong cách mạnh mẽ của cầu thủ sân cỏ"
+                          : "")
+                    ]),
+                  ),
+                ]),
+
+                Column(
                   children: [
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        Row(
+                          children: [
+                            GestureDetector(
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 300),
+                                margin: EdgeInsets.only(right: 16),
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                    color: Colors.white54,
+                                    borderRadius: BorderRadius.circular(10),
+                                    // border: Border.all(
+                                    //     color: Colors.deepOrangeAccent,
+                                    //     width: 2),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Color.fromRGBO(207, 207, 207, 1)
+                                            .withOpacity(0.5),
+                                        spreadRadius: 1,
+                                        blurRadius: 1,
+                                        offset: Offset(
+                                            0, 2), // changes position of shadow
+                                      ),
+                                    ]),
+                                child: Center(
+                                  child: Icon(
+                                    Icons.star,
+                                    color: Colors.black,
+                                    size: 24.0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Text(
+                              "Rating Product",
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black),
+                            )
+                          ],
+                        ),
                         GestureDetector(
                           child: AnimatedContainer(
                             duration: const Duration(milliseconds: 300),
-                            margin: EdgeInsets.only(right: 16),
+                            margin: EdgeInsets.all(5),
                             width: 40,
                             height: 40,
                             decoration: BoxDecoration(
@@ -252,64 +751,78 @@ class ProductDetailScreen extends StatelessWidget {
                                 ]),
                             child: Center(
                               child: Icon(
-                                Icons.description_outlined,
+                                Icons.arrow_right_outlined,
                                 color: Colors.black,
                                 size: 24.0,
                               ),
                             ),
                           ),
                         ),
-                        Text(
-                          "Description product",
-                          style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black),
-                        )
                       ],
                     ),
-                    GestureDetector(
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 300),
-                        margin: EdgeInsets.all(5),
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                            color: Colors.white54,
-                            borderRadius: BorderRadius.circular(10),
-                            // border: Border.all(
-                            //     color: Colors.deepOrangeAccent,
-                            //     width: 2),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color.fromRGBO(207, 207, 207, 1)
-                                    .withOpacity(0.5),
-                                spreadRadius: 1,
-                                blurRadius: 1,
-                                offset:
-                                    Offset(0, 2), // changes position of shadow
-                              ),
-                            ]),
-                        child: Center(
-                          child: Icon(
-                            Icons.arrow_right_outlined,
-                            color: Colors.black,
-                            size: 24.0,
-                          ),
-                        ),
-                      ),
+                    Container(
+                      margin: EdgeInsets.only(
+                          top: boolDescription ? 16 : 0,
+                          bottom: boolDescription ? 16 : 0),
+                      child: Column(children: [
+                        Text(boolDescription
+                            ? "Giày Đá Banh Sân Cỏ Nhân Tạo được thiết kế từ cao su cao cấp, bề mặt bằng da nhân tạo cho độ bám sàn tốt cũng như có độ bền cùng độ dẻo dai cao, là chọn lựa lý tưởng của những bạn nam yêu thích thể thao. Đặc biệt, thiết kế chủ đạo màu đen chuối nỏi bật, bắt mắt cùng logo ấn tượng, làm toát lên phong cách mạnh mẽ của cầu thủ sân cỏ"
+                            : "")
+                      ]),
                     ),
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Column(
                   children: [
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        Row(
+                          children: [
+                            GestureDetector(
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 300),
+                                margin: EdgeInsets.only(right: 16),
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                    color: Colors.white54,
+                                    borderRadius: BorderRadius.circular(10),
+                                    // border: Border.all(
+                                    //     color: Colors.deepOrangeAccent,
+                                    //     width: 2),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Color.fromRGBO(207, 207, 207, 1)
+                                            .withOpacity(0.5),
+                                        spreadRadius: 1,
+                                        blurRadius: 1,
+                                        offset: Offset(
+                                            0, 2), // changes position of shadow
+                                      ),
+                                    ]),
+                                child: Center(
+                                  child: Icon(
+                                    Icons.comment_outlined,
+                                    color: Colors.black,
+                                    size: 24.0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Text(
+                              "Comment Product",
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black),
+                            )
+                          ],
+                        ),
                         GestureDetector(
                           child: AnimatedContainer(
                             duration: const Duration(milliseconds: 300),
-                            margin: EdgeInsets.only(right: 16),
+                            margin: EdgeInsets.all(5),
                             width: 40,
                             height: 40,
                             decoration: BoxDecoration(
@@ -330,130 +843,24 @@ class ProductDetailScreen extends StatelessWidget {
                                 ]),
                             child: Center(
                               child: Icon(
-                                Icons.star,
+                                Icons.arrow_right_outlined,
                                 color: Colors.black,
                                 size: 24.0,
                               ),
                             ),
                           ),
                         ),
-                        Text(
-                          "Rating Product",
-                          style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black),
-                        )
                       ],
                     ),
-                    GestureDetector(
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 300),
-                        margin: EdgeInsets.all(5),
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                            color: Colors.white54,
-                            borderRadius: BorderRadius.circular(10),
-                            // border: Border.all(
-                            //     color: Colors.deepOrangeAccent,
-                            //     width: 2),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color.fromRGBO(207, 207, 207, 1)
-                                    .withOpacity(0.5),
-                                spreadRadius: 1,
-                                blurRadius: 1,
-                                offset:
-                                    Offset(0, 2), // changes position of shadow
-                              ),
-                            ]),
-                        child: Center(
-                          child: Icon(
-                            Icons.arrow_right_outlined,
-                            color: Colors.black,
-                            size: 24.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        GestureDetector(
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 300),
-                            margin: EdgeInsets.only(right: 16),
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                                color: Colors.white54,
-                                borderRadius: BorderRadius.circular(10),
-                                // border: Border.all(
-                                //     color: Colors.deepOrangeAccent,
-                                //     width: 2),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Color.fromRGBO(207, 207, 207, 1)
-                                        .withOpacity(0.5),
-                                    spreadRadius: 1,
-                                    blurRadius: 1,
-                                    offset: Offset(
-                                        0, 2), // changes position of shadow
-                                  ),
-                                ]),
-                            child: Center(
-                              child: Icon(
-                                Icons.comment_outlined,
-                                color: Colors.black,
-                                size: 24.0,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Text(
-                          "Comment Product",
-                          style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black),
-                        )
-                      ],
-                    ),
-                    GestureDetector(
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 300),
-                        margin: EdgeInsets.all(5),
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                            color: Colors.white54,
-                            borderRadius: BorderRadius.circular(10),
-                            // border: Border.all(
-                            //     color: Colors.deepOrangeAccent,
-                            //     width: 2),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color.fromRGBO(207, 207, 207, 1)
-                                    .withOpacity(0.5),
-                                spreadRadius: 1,
-                                blurRadius: 1,
-                                offset:
-                                    Offset(0, 2), // changes position of shadow
-                              ),
-                            ]),
-                        child: Center(
-                          child: Icon(
-                            Icons.arrow_right_outlined,
-                            color: Colors.black,
-                            size: 24.0,
-                          ),
-                        ),
-                      ),
+                    Container(
+                      margin: EdgeInsets.only(
+                          top: boolDescription ? 16 : 0,
+                          bottom: boolDescription ? 16 : 0),
+                      child: Column(children: [
+                        Text(boolDescription
+                            ? "Giày Đá Banh Sân Cỏ Nhân Tạo được thiết kế từ cao su cao cấp, bề mặt bằng da nhân tạo cho độ bám sàn tốt cũng như có độ bền cùng độ dẻo dai cao, là chọn lựa lý tưởng của những bạn nam yêu thích thể thao. Đặc biệt, thiết kế chủ đạo màu đen chuối nỏi bật, bắt mắt cùng logo ấn tượng, làm toát lên phong cách mạnh mẽ của cầu thủ sân cỏ"
+                            : "")
+                      ]),
                     ),
                   ],
                 ),

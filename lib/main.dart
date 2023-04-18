@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shop_shoes/user/Login_screen.dart';
 import 'package:flutter_shop_shoes/user/account_screen.dart';
 import 'package:flutter_shop_shoes/user/bottom_bar.dart';
 import 'package:flutter_shop_shoes/user/cart_screen.dart';
@@ -9,10 +10,30 @@ import 'package:flutter_shop_shoes/user/info_screen.dart';
 import 'package:flutter_shop_shoes/user/notification_screen.dart';
 import 'package:flutter_shop_shoes/user/order_screen.dart';
 import 'package:flutter_shop_shoes/user/product_detail_screen.dart';
+import 'package:flutter_shop_shoes/user/register_screen.dart';
 import 'package:flutter_shop_shoes/user/search_screen.dart';
 import 'package:flutter_shop_shoes/user/home_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-void main() {
+void main() async {
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp(
+  //     options: FirebaseOptions(
+  //         apiKey: "AIzaSyCXfAnqS96Q2BqW2cZGuzDLHec2ZiowKtM",
+  //         appId: "1:687590845115:android:8b60a792ffc45bc422579e",
+  //         messagingSenderId: "",
+  //         projectId: "fluttershoesshops"));
+  // runApp(const MyApp());
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+      options: FirebaseOptions(
+          apiKey: "AIzaSyCZoPWCiZ_6g2KfFT_d33AStAIFwub_3mo",
+          appId: "1:712385427945:android:d5fc499cd06ccaef5eb378",
+          messagingSenderId: "",
+          projectId: "testproject-6e401"));
   runApp(const MyApp());
 }
 
@@ -36,7 +57,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: CartScreen(),
+      home: HomeScreen(),
     );
   }
 }
@@ -123,5 +144,13 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  logout() async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (BuildContext context) {
+      return LoginScreen();
+    }), (route) => false);
   }
 }
