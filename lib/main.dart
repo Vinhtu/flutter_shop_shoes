@@ -30,10 +30,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
       options: FirebaseOptions(
-          apiKey: "AIzaSyCZoPWCiZ_6g2KfFT_d33AStAIFwub_3mo",
-          appId: "1:712385427945:android:d5fc499cd06ccaef5eb378",
+          apiKey: "AIzaSyCXfAnqS96Q2BqW2cZGuzDLHec2ZiowKtM",
+          appId: "1:687590845115:android:8b60a792ffc45bc422579e",
           messagingSenderId: "",
-          projectId: "testproject-6e401"));
+          projectId: "fluttershoesshops"));
   runApp(const MyApp());
 }
 
