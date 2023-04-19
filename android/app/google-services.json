@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "687590845115",
-    "project_id": "fluttershoesshops",
-    "storage_bucket": "fluttershoesshops.appspot.com"
+    "project_number": "314873554248",
+    "project_id": "projectfinal-abdf9",
+    "storage_bucket": "projectfinal-abdf9.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:687590845115:android:8b60a792ffc45bc422579e",
+        "mobilesdk_app_id": "1:314873554248:android:ec5718a45e94a172583f7d",
         "android_client_info": {
           "package_name": "com.example.flutter_shop_shoes"
         }
       },
       "oauth_client": [
         {
-          "client_id": "687590845115-dbbe1ojks5gih39jp14hqf6jda6t6i00.apps.googleusercontent.com",
+          "client_id": "314873554248-lnvjfphbqufg6anuevd1471j62gc7tfn.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCXfAnqS96Q2BqW2cZGuzDLHec2ZiowKtM"
+          "current_key": "AIzaSyDM4x-vRG0fAakGtUG_JYuU9KsWs_CML_Q"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "687590845115-dbbe1ojks5gih39jp14hqf6jda6t6i00.apps.googleusercontent.com",
+              "client_id": "314873554248-lnvjfphbqufg6anuevd1471j62gc7tfn.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

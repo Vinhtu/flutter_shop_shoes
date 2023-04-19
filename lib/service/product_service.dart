@@ -25,8 +25,9 @@ class ProductService {
   Future<List<Object>> retrieveProduct() async {
     QuerySnapshot<Map<String, dynamic>> snapshot =
         await _db.collection("products").get();
-
-    return snapshot.docs.map((e) => ProductModel).toList(); //error
+    return snapshot.docs
+        .map((e) => ProductModel.fromSnapshot(e))
+        .toList(); //error
   }
 
   // final CollectionReference productList =

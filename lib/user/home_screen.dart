@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 
 import '../model/product_model.dart';
 
-// class Record {
+// class Product {
 //   final String id;
 //   final String name;
 //   final String thumbnail;
@@ -19,13 +19,13 @@ import '../model/product_model.dart';
 //   final String size;
 
 //   final DocumentReference reference;
-//   Record.fromSnapshot(DocumentSnapshot snapshot)
+//   Product.fromSnapshot(DocumentSnapshot snapshot)
 //       : this.fromMap(
 //           snapshot.data() as Map<dynamic, dynamic>,
 //           reference: snapshot.reference,
 //         );
 
-//   Record.fromMap(
+//   Product.fromMap(
 //     Map<dynamic, dynamic> map, {
 //     required this.reference,
 //   })  : assert(map['id'] != null),
@@ -105,6 +105,61 @@ class _HomeScreenState extends State<HomeScreen> {
     initialPage: 0,
     keepPage: true,
   );
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   //    QuerySnapshot<Map<String, dynamic>> snapshot =
+  //   //     await _db.collection("products").get();
+  //   // return snapshot.docs.map((e) => ProductModel).toList(); //error
+
+  //   return StreamBuilder<QuerySnapshot>(
+  //     stream: FirebaseFirestore.instance.collection('products').snapshots(),
+  //     builder: (context, snapshot) {
+  //       if (!snapshot.hasData) return LinearProgressIndicator();
+  //       return _buildList(context, snapshot.data?.docs ?? []);
+  //     },
+  //   );
+  // }
+
+  // Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
+  //   return ListView(
+  //     padding: const EdgeInsets.only(top: 22.0),
+  //     children: snapshot.map((data) => _buildListItem(context, data)).toList(),
+  //   );
+  // }
+
+  // Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
+  //   final product = Product.fromSnapshot(data);
+
+  //   return Material(
+  //     child: Container(
+  //         child: Column(
+  //       children: [
+  //         Container(
+  //           height: 500,
+  //           child: Padding(
+  //             key: ValueKey(product.name),
+  //             padding:
+  //                 const EdgeInsets.symmetric(horizontal: 15.0, vertical: 7.0),
+  //             child: Container(
+  //               decoration: BoxDecoration(
+  //                 border: Border.all(color: Colors.red),
+  //                 borderRadius: BorderRadius.circular(6.0),
+  //               ),
+  //               child: ListTile(
+  //                 title: Text("Id Person: " +
+  //                     product.id +
+  //                     "       Name Person: " +
+  //                     product.name),
+  //                 trailing: Text("Votes Person: " + product.name),
+  //               ),
+  //             ),
+  //           ),
+  //         )
+  //       ],
+  //     )),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -478,9 +533,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         // itemCount:
                                                         //     retrievedProductList!
                                                         //         .length,
-                                                        itemCount:
-                                                            productTopSale
-                                                                .length,
+                                                        itemCount: 6,
                                                         scrollDirection:
                                                             Axis.vertical,
                                                         primary: false,
@@ -564,7 +617,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                             Row(
                                                                           children: [
                                                                             Text(
-                                                                              "Hồ Chí Minh",
+                                                                              "${retrievedProductList?[index].name.toString()}, ${retrievedProductList?[index].price.toString()}",
                                                                               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
                                                                             ),
                                                                           ],

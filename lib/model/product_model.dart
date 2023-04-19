@@ -32,7 +32,7 @@ class ProductModel {
       QueryDocumentSnapshot<Map<String, dynamic>> snapshot)
       : id = snapshot["id"],
         name = snapshot["name"],
-        thumbnail = snapshot["thumnail"],
+        thumbnail = snapshot["thumbnail"],
         price = snapshot["price"],
         color = snapshot["color"],
         size = snapshot["size"];
@@ -40,7 +40,7 @@ class ProductModel {
   ProductModel.fromMap(Map<String, dynamic> productMap)
       : id = productMap["id"],
         name = productMap["name"],
-        thumbnail = productMap["thumnail"],
+        thumbnail = productMap["thumbnail"],
         price = productMap["price"],
         color = productMap["color"],
         size = productMap["size"];
