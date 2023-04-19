@@ -1,35 +1,47 @@
-class ProductModel {
+class AccountModel {
   final String id;
-  final String name;
-  final String thumbnail;
-  final String price;
-  final String color;
-  final String size;
+  final String fullname;
+  final String username;
+  final String password;
+  final String phone;
+  final String line;
+  final String district;
+  final String ward;
+  final String city;
 
-  ProductModel(
+  AccountModel(
       {required this.id,
-      required this.name,
-      required this.thumbnail,
-      required this.price,
-      required this.color,
-      required this.size});
+      required this.fullname,
+      required this.username,
+      required this.password,
+      required this.phone,
+      required this.line,
+      required this.district,
+      required this.ward,
+      required this.city});
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'name': name,
-      'thumbnail': thumbnail,
-      'price': price,
-      'color': color,
-      'size': size,
+      'fullname': fullname,
+      'username': username,
+      'password': password,
+      'phone': phone,
+      'line': line,
+      'district': district,
+      'ward': ward,
+      'city': city,
     };
   }
 
-  ProductModel.fromMap(Map<String, dynamic> productMap)
+  AccountModel.fromMap(Map<String, dynamic> productMap)
       : id = productMap["id"],
-        name = productMap["name"],
-        thumbnail = productMap["thumnail"],
-        price = productMap["price"],
-        color = productMap["color"],
-        size = productMap["size"];
+        fullname = productMap["fullname"],
+        username = productMap["username"],
+        password = productMap["password"],
+        phone = productMap["phone"],
+        line = productMap["line"],
+        district = productMap["district"],
+        ward = productMap["ward"],
+        city = productMap["city"];
 }

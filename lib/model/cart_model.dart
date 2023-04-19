@@ -1,35 +1,30 @@
-class ProductModel {
-  final String id;
-  final String name;
-  final String thumbnail;
-  final String price;
-  final String color;
-  final String size;
+import 'package:flutter_shop_shoes/model/cartitem_model.dart';
 
-  ProductModel(
-      {required this.id,
-      required this.name,
-      required this.thumbnail,
-      required this.price,
-      required this.color,
-      required this.size});
+class CartModel {
+  final String id;
+  final List<CartitemModel> cartitem;
+  final String startShip;
+  final String endShip;
+
+  CartModel({
+    required this.id,
+    required this.cartitem,
+    required this.startShip,
+    required this.endShip,
+  });
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'name': name,
-      'thumbnail': thumbnail,
-      'price': price,
-      'color': color,
-      'size': size,
+      'cartitem': cartitem,
+      'startShip': startShip,
+      'endShip': endShip,
     };
   }
 
-  ProductModel.fromMap(Map<String, dynamic> productMap)
-      : id = productMap["id"],
-        name = productMap["name"],
-        thumbnail = productMap["thumnail"],
-        price = productMap["price"],
-        color = productMap["color"],
-        size = productMap["size"];
+  CartModel.fromMap(Map<String, dynamic> cart)
+      : id = cart["id"],
+        cartitem = cart["cartitem"],
+        startShip = cart["startShip"],
+        endShip = cart["endShip"];
 }

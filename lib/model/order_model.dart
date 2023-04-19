@@ -1,35 +1,40 @@
+import 'package:flutter_shop_shoes/model/cartitem_model.dart';
+
+import 'orderitem_model.dart';
+
 class OrderModel {
   final String id;
-  final String name;
-  final String thumbnail;
-  final String price;
-  final String color;
-  final String size;
+  final List<OrderitemModel> orderitem;
+  final String startShip;
+  final String endShip;
+  final String date;
+  final String status;
 
-  OrderModel(
-      {required this.id,
-      required this.name,
-      required this.thumbnail,
-      required this.price,
-      required this.color,
-      required this.size});
+  OrderModel({
+    required this.id,
+    required this.orderitem,
+    required this.startShip,
+    required this.endShip,
+    required this.date,
+    required this.status,
+  });
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'name': name,
-      'thumbnail': thumbnail,
-      'price': price,
-      'color': color,
-      'size': size,
+      'cartitem': orderitem,
+      'startShip': startShip,
+      'endShip': endShip,
+      'date': date,
+      'status': status,
     };
   }
 
-  OrderModel.fromMap(Map<String, dynamic> orderMap)
-      : id = orderMap["id"],
-        name = orderMap["name"],
-        thumbnail = orderMap["thumnail"],
-        price = orderMap["price"],
-        color = orderMap["color"],
-        size = orderMap["size"];
+  OrderModel.fromMap(Map<String, dynamic> order)
+      : id = order["id"],
+        orderitem = order["orderitem"],
+        startShip = order["startShip"],
+        endShip = order["endShip"],
+        date = order["date"],
+        status = order["status"];
 }

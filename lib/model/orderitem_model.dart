@@ -3,12 +3,12 @@ import 'package:flutter_shop_shoes/model/product_model.dart';
 import 'account_model.dart';
 import 'note_model.dart';
 
-class CartitemModel {
+class OrderitemModel {
   final String id;
   final ProductModel product;
   final String amount;
 
-  CartitemModel({
+  OrderitemModel({
     required this.id,
     required this.product,
     required this.amount,
@@ -22,8 +22,8 @@ class CartitemModel {
     };
   }
 
-  CartitemModel.fromMap(Map<String, dynamic> cartitem)
-      : id = cartitem["id"],
-        product = cartitem["product"],
-        amount = cartitem["amount"];
+  OrderitemModel.fromMap(Map<String, dynamic> orderitem)
+      : id = orderitem["id"],
+        product = orderitem["product"],
+        amount = orderitem["amount"];
 }
