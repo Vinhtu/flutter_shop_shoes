@@ -1,21 +1,37 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_shop_shoes/user/Login_screen.dart';
-import 'package:flutter_shop_shoes/user/account_screen.dart';
-import 'package:flutter_shop_shoes/user/bottom_bar.dart';
-import 'package:flutter_shop_shoes/user/cart_screen.dart';
-import 'package:flutter_shop_shoes/user/checkout_fail_screen%20copy.dart';
-import 'package:flutter_shop_shoes/user/checkout_screen.dart';
-import 'package:flutter_shop_shoes/user/checkout_success_screen.dart';
-import 'package:flutter_shop_shoes/user/info_screen.dart';
-import 'package:flutter_shop_shoes/user/notification_screen.dart';
-import 'package:flutter_shop_shoes/user/order_screen.dart';
-import 'package:flutter_shop_shoes/user/product_detail_screen.dart';
-import 'package:flutter_shop_shoes/user/register_screen.dart';
-import 'package:flutter_shop_shoes/user/search_screen.dart';
-import 'package:flutter_shop_shoes/user/home_screen.dart';
+// @dart=2.9
+// --no-sound-null-safety
 import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_shop_shoes/screens/HomeScreen.dart';
+import 'package:flutter_shop_shoes/screens/ShoppingCartScreen.dart';
+import 'package:flutter_shop_shoes/screens/WishListScreen.dart';
+import 'package:flutter_shop_shoes/src/router/routerr.dart';
+import 'package:flutter_shop_shoes/src/view/screen/category_product_screen.dart';
+import 'package:flutter_shop_shoes/src/view/screen/choice_address_screen.dart';
+import 'package:flutter_shop_shoes/src/view/screen/dash_board_screen.dart';
+import 'package:flutter_shop_shoes/src/view/screen/detail_product_screen.dart';
+import 'package:flutter_shop_shoes/src/view/screen/home_tab.dart';
+import 'package:flutter_shop_shoes/src/view/screen/list_order.dart';
+import 'package:flutter_shop_shoes/src/view/screen/login_screen.dart';
+import 'package:flutter_shop_shoes/src/view/screen/order_success_screen.dart';
+import 'package:flutter_shop_shoes/src/view/screen/register_screen.dart';
+import 'package:flutter_shop_shoes/src/viewmodel/address_viewmodel.dart';
+import 'package:flutter_shop_shoes/src/viewmodel/auth_viemodel.dart';
+import 'package:flutter_shop_shoes/src/viewmodel/bottom_navigate_provider.dart';
+import 'package:flutter_shop_shoes/src/viewmodel/cart_viewmodel.dart';
+import 'package:flutter_shop_shoes/src/viewmodel/login_viewmodel.dart';
+import 'package:flutter_shop_shoes/src/viewmodel/product_viewmodel.dart';
+import 'package:flutter_shop_shoes/src/viewmodel/user_viewmodel.dart';
+import 'package:flutter_shop_shoes/src/viewmodel/whislist_viewmodel.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
+
+import 'common_widget/AppBarWidget.dart';
+import 'common_widget/BottomNavBarWidget.dart';
+import 'common_widget/DrawerWidget.dart';
+import 'models/CartModel.dart';
 
 void main() async {
   // WidgetsFlutterBinding.ensureInitialized();
@@ -29,7 +45,7 @@ void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-      options: FirebaseOptions(
+      options: const FirebaseOptions(
           apiKey: "AIzaSyDM4x-vRG0fAakGtUG_JYuU9KsWs_CML_Q",
           appId: "1:314873554248:android:ec5718a45e94a172583f7d",
           messagingSenderId: "",
@@ -38,119 +54,120 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: HomeScreen(),
-    );
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => BottomNavigationProvider()),
+          ChangeNotifierProvider(create: (_) => CartViewModel()),
+          ChangeNotifierProvider(create: (_) => AddressViewModel()),
+          ChangeNotifierProvider(create: (_) => WishListViewModel()),
+          ChangeNotifierProvider(create: (_) => UserViewModel()),
+          ChangeNotifierProvider(create: (_) => LoginViewModel()),
+          ChangeNotifierProvider(
+              create: (_) => ProductViewModel()..getListProduct()),
+          ChangeNotifierProvider(create: (_) => AuthViewModel())
+        ],
+        child: GetMaterialApp(
+          home: DashBoardScreen(),
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          onGenerateRoute: Routerr.onGenerateRouter,
+          getPages: [
+            GetPage(name: '/product-detail', page: () => DetailProductScreen()),
+            // GetPage(name: '/cart', page: () => ShoppingCartScreen()),
+            GetPage(name: '/home', page: () => HomeTab()),
+            GetPage(name: '/', page: () => DashBoardScreen()),
+            GetPage(name: '/chooseaddress', page: () => ChoiceAddressScreen()),
+            GetPage(name: '/register', page: () => RegisterScreen()),
+
+            GetPage(name: '/login', page: () => LoginScreen()),
+            GetPage(name: '/order-success', page: () => OrderSuccessScreen()),
+            GetPage(name: '/order-fail', page: () => OrderSuccessScreen()),
+            GetPage(name: '/list-order', page: () => ListOrderScreen()),
+
+            GetPage(
+                name: '/category-product', page: () => CategoryProductScreen()),
+            // Dynamic route
+          ],
+        ));
   }
+}
+
+int currentIndex = 0;
+
+void navigateToScreens(int index) {
+  currentIndex = index;
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  _MyHomePageNewState createState() => _MyHomePageNewState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+class _MyHomePageNewState extends State<MyHomePage> {
+  final List<Widget> viewContainer = [
+    HomeScreen(),
+    WishListScreen(),
+    ShoppingCartScreen(),
+    // HomeScreen()
+  ];
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+    void _onItemTapped(int index) {
+      setState(() {
+        currentIndex = index;
+        // navigateToScreens(index);
+      });
+    }
+
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBarWidget(context),
+        drawer: DrawerWidget(),
+        body: IndexedStack(
+          index: currentIndex,
+          children: viewContainer,
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+              // label: Text(
+              //   'Home',
+              //   style: TextStyle(color: Color(0xFF545454)),
+              // ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            BottomNavigationBarItem(
+              icon: Icon(FontAwesomeIcons.heart),
+              label: 'Wish List',
+              // title: Text(
+              //   'Wish List',
+              //   style: TextStyle(color: Color(0xFF545454)),
+              // ),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(FontAwesomeIcons.shoppingBag),
+              label: 'Cart',
+              // title: Text(
+              //   'Cart',
+              //   style: TextStyle(color: Color(0xFF545454)),
+              // ),
             ),
           ],
+          currentIndex: currentIndex,
+          selectedItemColor: Color(0xFFAA292E),
+          onTap: _onItemTapped,
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
-  }
-
-  logout() async {
-    await FirebaseAuth.instance.signOut();
-    Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (BuildContext context) {
-      return LoginScreen();
-    }), (route) => false);
   }
 }
