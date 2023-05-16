@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_shop_shoes/src/const/app_font.dart';
 import 'package:flutter_shop_shoes/src/data/model/product.dart';
 import 'package:flutter_shop_shoes/src/router/router_path.dart';
+import 'package:flutter_shop_shoes/src/view/screen/all_product_screen.dart';
 import 'package:flutter_shop_shoes/src/viewmodel/login_viewmodel.dart';
 import 'package:flutter_shop_shoes/src/viewmodel/product_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +27,8 @@ class BodyPage extends StatefulWidget {
 class _BodyPageState extends State<BodyPage> {
   final Stream<QuerySnapshot> collectionReferenceProduct =
       ProductService.readProduct();
+  final Stream<QuerySnapshot> getProductBestSaller =
+      UserService.readProductBestSaller("bestsaller");
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +49,56 @@ class _BodyPageState extends State<BodyPage> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildHeaderBody(title: "All Product", description: "5 star"),
+          // buildHeaderBody(title: "All Product", description: "5 star"),
+          Row(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "All Product",
+                    style: AppFont.bold.copyWith(
+                      fontSize: 35,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    "5 star",
+                    style: AppFont.regular.copyWith(
+                      fontSize: 13,
+                      color: Colors.grey,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                ],
+              ),
+              Spacer(),
+              InkWell(
+                onTap: () {
+                  Get.toNamed("/all-product");
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => AllProductScreen()),
+                  // );
+                  // Navigator.push(
+                  //     context,
+                  //     CupertinoPageRoute(
+                  //         builder: (context) => AllProductScreen()));
+                },
+                child: Text(
+                  'View all',
+                  style: AppFont.regular.copyWith(
+                    fontSize: 13,
+                    color: Colors.black,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ),
+            ],
+          ),
           SizedBox(
             height: 20,
           ),
@@ -73,7 +126,7 @@ class _BodyPageState extends State<BodyPage> {
                               //     arguments: e);
 
                               Get.toNamed("/product-detail", arguments: {
-                                "id": e["id"],
+                                "id": e.id,
                                 "name": e["name"],
                                 "thumbnail": e["thumbnail"],
                                 "thumbnail1": e["thumbnail1"],
@@ -83,7 +136,6 @@ class _BodyPageState extends State<BodyPage> {
                                 "color": e["color"],
                                 "size": e["size"],
                                 "description": e["description"],
-                                "promotion": e["promotion"],
                                 "amount": e["amount"],
                                 "brand": e["brand"],
                                 "category": e["category"]
@@ -137,7 +189,7 @@ class _BodyPageState extends State<BodyPage> {
                                                 onTap: () {
                                                   wishlist.addItems(
                                                       e['name'],
-                                                      e["id"],
+                                                      e.id,
                                                       int.parse(e['price'])
                                                           as double,
                                                       e['thumbnail'],
@@ -254,14 +306,62 @@ class _BodyPageState extends State<BodyPage> {
           SizedBox(
             height: 30,
           ),
-          buildHeaderBody(title: "Best Saler", description: "5 star"),
+          Row(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "BestSaler Product",
+                    style: AppFont.bold.copyWith(
+                      fontSize: 35,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    "5 star",
+                    style: AppFont.regular.copyWith(
+                      fontSize: 13,
+                      color: Colors.grey,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                ],
+              ),
+              Spacer(),
+              InkWell(
+                onTap: () {
+                  Get.toNamed("/best-saller");
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => AllProductScreen()),
+                  // );
+                  // Navigator.push(
+                  //     context,
+                  //     CupertinoPageRoute(
+                  //         builder: (context) => AllProductScreen()));
+                },
+                child: Text(
+                  'View all',
+                  style: AppFont.regular.copyWith(
+                    fontSize: 13,
+                    color: Colors.black,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ),
+            ],
+          ),
           SizedBox(
             height: 20,
           ),
           SizedBox(
             height: cardWidth / 0.59,
             child: StreamBuilder(
-              stream: collectionReferenceProduct,
+              stream: getProductBestSaller,
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasData) {
@@ -282,7 +382,7 @@ class _BodyPageState extends State<BodyPage> {
                               //     arguments: e);
 
                               Get.toNamed("/product-detail", arguments: {
-                                "id": e["id"],
+                                "id": e.id,
                                 "name": e["name"],
                                 "thumbnail": e["thumbnail"],
                                 "thumbnail1": e["thumbnail1"],
@@ -292,7 +392,6 @@ class _BodyPageState extends State<BodyPage> {
                                 "color": e["color"],
                                 "size": e["size"],
                                 "description": e["description"],
-                                "promotion": e["promotion"],
                                 "amount": e["amount"],
                                 "brand": e["brand"],
                                 "category": e["category"]
@@ -349,7 +448,7 @@ class _BodyPageState extends State<BodyPage> {
                                                   onTap: () {
                                                     wishlist.addItems(
                                                         e['name'],
-                                                        e["id"],
+                                                        e.id,
                                                         int.parse(e['price'])
                                                             as double,
                                                         e['thumbnail'],

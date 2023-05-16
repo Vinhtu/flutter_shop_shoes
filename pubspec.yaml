@@ -67,6 +67,7 @@ dependencies:
   flutter_rating_bar: ^4.0.0
   page_transition: ^2.0.2
   fluttertoast: ^8.0.7
+  flutter_paypal: ^0.0.8
   
   # cloud_firestore: <version>
   # firebase_core: <version>

@@ -174,6 +174,14 @@ class UserService {
     return notesItemCollection.snapshots();
   }
 
+  static Stream<QuerySnapshot> readProductBestSaller(name) {
+    final CollectionReference _collectionproduct = db.collection('products');
+    Query<Object?> notesItemCollection =
+        _collectionproduct.where("type", isEqualTo: name);
+
+    return notesItemCollection.snapshots();
+  }
+
   static Stream<QuerySnapshot> readProducSearch(name) {
     final CollectionReference _collectionproduct = db.collection('products');
     Query<Object?> notesItemCollection =

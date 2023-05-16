@@ -7,13 +7,17 @@ import 'package:flutter_shop_shoes/screens/HomeScreen.dart';
 import 'package:flutter_shop_shoes/screens/ShoppingCartScreen.dart';
 import 'package:flutter_shop_shoes/screens/WishListScreen.dart';
 import 'package:flutter_shop_shoes/src/router/routerr.dart';
+import 'package:flutter_shop_shoes/src/view/screen/all_product_screen.dart';
+import 'package:flutter_shop_shoes/src/view/screen/bestsale_product_screen%20copy.dart';
 import 'package:flutter_shop_shoes/src/view/screen/category_product_screen.dart';
 import 'package:flutter_shop_shoes/src/view/screen/choice_address_screen.dart';
 import 'package:flutter_shop_shoes/src/view/screen/dash_board_screen.dart';
 import 'package:flutter_shop_shoes/src/view/screen/detail_product_screen.dart';
+import 'package:flutter_shop_shoes/src/view/screen/edit_person_screen.dart';
 import 'package:flutter_shop_shoes/src/view/screen/home_tab.dart';
 import 'package:flutter_shop_shoes/src/view/screen/list_order.dart';
 import 'package:flutter_shop_shoes/src/view/screen/login_screen.dart';
+import 'package:flutter_shop_shoes/src/view/screen/note_screen.dart';
 import 'package:flutter_shop_shoes/src/view/screen/order_success_screen.dart';
 import 'package:flutter_shop_shoes/src/view/screen/register_screen.dart';
 import 'package:flutter_shop_shoes/src/viewmodel/address_viewmodel.dart';
@@ -89,9 +93,17 @@ class MyApp extends StatelessWidget {
             GetPage(name: '/order-success', page: () => OrderSuccessScreen()),
             GetPage(name: '/order-fail', page: () => OrderSuccessScreen()),
             GetPage(name: '/list-order', page: () => ListOrderScreen()),
+            GetPage(
+                name: '/list-notifications', page: () => NotifycationScreen()),
 
             GetPage(
                 name: '/category-product', page: () => CategoryProductScreen()),
+
+            GetPage(name: '/all-product', page: () => AllProductScreen()),
+
+            GetPage(name: '/best-saller', page: () => BestSalerProductScreen()),
+            GetPage(name: '/edit-person', page: () => EditPersonScreen()),
+
             // Dynamic route
           ],
         ));

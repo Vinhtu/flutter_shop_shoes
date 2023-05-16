@@ -20,6 +20,18 @@ class CartItem {
     required this.color,
     required this.size,
   });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'title': title,
+      'id': id,
+      'thumbnail': thumbnail,
+      'quantity': quantity,
+      'price': price,
+      'color': color,
+      'size': size
+    };
+  }
 }
 
 class CartViewModel with ChangeNotifier {

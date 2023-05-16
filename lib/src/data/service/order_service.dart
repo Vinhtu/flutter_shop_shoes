@@ -2,6 +2,7 @@ import 'dart:js';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_shop_shoes/src/viewmodel/cart_viewmodel.dart';
 import 'package:flutter_shop_shoes/src/viewmodel/user_viewmodel.dart';
 import 'package:provider/provider.dart';
 
@@ -20,9 +21,13 @@ class OrderService {
     required String total,
     required String product,
     required String status,
+    required CartViewModel cartviewmodel,
   }) async {
     Response response = Response();
     DocumentReference documentReferencer = _collection.doc();
+
+    final itemsData =
+        cartviewmodel.items.values.map((item) => item.toMap()).toList();
 
     Map<String, dynamic> data = <String, dynamic>{
       'username': username,
@@ -32,6 +37,7 @@ class OrderService {
       'ward': ward,
       'total': total,
       'product': product,
+      'orderitems': itemsData,
       'status': status,
     };
 

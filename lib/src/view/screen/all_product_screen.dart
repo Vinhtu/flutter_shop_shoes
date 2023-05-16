@@ -17,17 +17,14 @@ import '../../const/app_colors.dart';
 import '../../viewmodel/whislist_viewmodel.dart';
 import 'component/hometab/cart_product.dart';
 
-class CategoryProductScreen extends StatefulWidget {
+class AllProductScreen extends StatefulWidget {
   @override
-  _CategoryProductState createState() => _CategoryProductState();
+  _AllProductState createState() => _AllProductState();
 }
 
-class _CategoryProductState extends State<CategoryProductScreen> {
+class _AllProductState extends State<AllProductScreen> {
   final Stream<QuerySnapshot> collectionReferenceProduct =
       ProductService.readProduct();
-
-  final Stream<QuerySnapshot> getProductCategory =
-      UserService.readProductCategory(Get.arguments["name"]);
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +40,7 @@ class _CategoryProductState extends State<CategoryProductScreen> {
         backgroundColor: Colors.white,
         centerTitle: true,
         leading: IconButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => {Get.toNamed("/")},
           icon: Icon(
             Icons.arrow_back_ios,
             size: 20,
@@ -51,7 +48,7 @@ class _CategoryProductState extends State<CategoryProductScreen> {
           ),
         ),
         title: Text(
-          "${Get.arguments["name"]}",
+          "All products",
           style: AppFont.semiBold.copyWith(
             fontWeight: FontWeight.bold,
           ),
@@ -72,7 +69,7 @@ class _CategoryProductState extends State<CategoryProductScreen> {
             SizedBox(
               height: 700,
               child: StreamBuilder(
-                stream: getProductCategory,
+                stream: collectionReferenceProduct,
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.hasData) {
@@ -267,11 +264,8 @@ class _CategoryProductState extends State<CategoryProductScreen> {
                     );
                   }
 
-                  return SizedBox(
-                    height: 100,
-                    child: Container(
-                      child: Text("null"),
-                    ),
+                  return Center(
+                    child: Text("Rỗng"),
                   );
                 },
               ),

@@ -13,6 +13,14 @@ class FavoriteScroll extends StatelessWidget {
   Widget build(BuildContext context) {
     var wishlistData = Provider.of<WishListViewModel>(context);
     print(wishlistData.itemCount);
+
+    if (wishlistData.itemCount <= 0) {
+      return Container(
+        child: Center(
+          child: Text("Rỗng"),
+        ),
+      );
+    }
     return Container(
       child: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

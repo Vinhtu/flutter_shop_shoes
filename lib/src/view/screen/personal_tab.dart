@@ -17,14 +17,6 @@ class PersonalTab extends StatefulWidget {
 }
 
 class _PersonalTabState extends State<PersonalTab> {
-  Map<String, String> listInfomation = {
-    'My orders': 'Already have 12 orders',
-    'Shipping addresses': '3 address',
-    'Payment methods': 'Visa ',
-    'My reviews': 'Reviews for 4 items',
-    'Recent View': 'Reviews for 4 items',
-  };
-
   @override
   Widget build(BuildContext context) {
     var userData = Provider.of<UserViewModel>(context);
@@ -116,7 +108,7 @@ class _PersonalTabState extends State<PersonalTab> {
                           ),
                           InkWell(
                             onTap: () {
-                              Get.toNamed("/list-notification");
+                              Get.toNamed("/list-notifications");
                             },
                             child: ListTile(
                               contentPadding: EdgeInsets.all(0.0),
@@ -144,7 +136,7 @@ class _PersonalTabState extends State<PersonalTab> {
                           ),
                           InkWell(
                             onTap: () {
-                              Get.toNamed("/edit-profile");
+                              Get.toNamed("/edit-person");
                             },
                             child: ListTile(
                               contentPadding: EdgeInsets.all(0.0),

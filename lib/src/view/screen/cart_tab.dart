@@ -12,6 +12,7 @@ import '../../const/app_font.dart';
 import '../../router/router_path.dart';
 import '../../viewmodel/user_viewmodel.dart';
 import 'component/carttab/cart_scroll.dart';
+import 'package:flutter_paypal/flutter_paypal.dart';
 
 class CartTab extends StatelessWidget {
   @override
@@ -425,7 +426,8 @@ class CartTab extends StatelessWidget {
                               ward: userData!.items.values.toList()[0].ward,
                               total: cartData.totalPrice.toString(),
                               product: cartData.itemCount.toString(),
-                              status: "Pending");
+                              status: "Pending",
+                              cartviewmodel: cartData);
 
                           if (response.code != 200) {
                             showDialog(
@@ -440,6 +442,31 @@ class CartTab extends StatelessWidget {
                           }
                         } else {
                           Get.toNamed("/login");
+
+                          var response = await OrderService.addOrder(
+                              username:
+                                  userData!.items.values.toList()[0].username,
+                              phone: userData!.items.values.toList()[0].phone,
+                              line: userData!.items.values.toList()[0].line,
+                              district:
+                                  userData!.items.values.toList()[0].district,
+                              ward: userData!.items.values.toList()[0].ward,
+                              total: cartData.totalPrice.toString(),
+                              product: cartData.itemCount.toString(),
+                              status: "Pending",
+                              cartviewmodel: cartData);
+
+                          if (response.code != 200) {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    content: Text(response.message.toString()),
+                                  );
+                                });
+                          } else {
+                            Get.toNamed("/order-success");
+                          }
                         }
                         // cartViewModel.checkOutCart();
                         // Navigator.pushNamed(context, OrderSuccessScreens),
@@ -447,6 +474,76 @@ class CartTab extends StatelessWidget {
                       child: Text('Checkout'),
                     ),
                   ),
+                  TextButton(
+                      onPressed: () => {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => UsePaypal(
+                                      sandboxMode: true,
+                                      clientId:
+                                          "AQ38jdQEPTks8dgI7FmZxW5YGsQObRayS8uH3sbzj9CVwZFcaSvaz2BSpkAL0QjPOksx2AbrSWCr_nSn",
+                                      secretKey:
+                                          "EHehMZgnaDf1g-oYwgReeDs29kHchQfkfgCw0TnzJ1_cSntX7iMJLJsLfnKMfsn4HZzfXTbuynSgPnTm",
+                                      returnURL:
+                                          "https://samplesite.com/return",
+                                      cancelURL:
+                                          "https://samplesite.com/cancel",
+                                      transactions: const [
+                                        {
+                                          "amount": {
+                                            "total": '10.12',
+                                            "currency": "USD",
+                                            "details": {
+                                              "subtotal": '10.12',
+                                              "shipping": '0',
+                                              "shipping_discount": 0
+                                            }
+                                          },
+                                          "description":
+                                              "The payment transaction description.",
+                                          // "payment_options": {
+                                          //   "allowed_payment_method":
+                                          //       "INSTANT_FUNDING_SOURCE"
+                                          // },
+                                          "item_list": {
+                                            "items": [
+                                              {
+                                                "name": "A demo product",
+                                                "quantity": 1,
+                                                "price": '10.12',
+                                                "currency": "USD"
+                                              }
+                                            ],
+
+                                            // shipping address is not required though
+                                            "shipping_address": {
+                                              "recipient_name": "Jane Foster",
+                                              "line1": "Travis County",
+                                              "line2": "",
+                                              "city": "Austin",
+                                              "country_code": "US",
+                                              "postal_code": "73301",
+                                              "phone": "+00000000",
+                                              "state": "Texas"
+                                            },
+                                          }
+                                        }
+                                      ],
+                                      note:
+                                          "Contact us for any questions on your order.",
+                                      onSuccess: (Map params) async {
+                                        print("onSuccess: $params");
+                                      },
+                                      onError: (error) {
+                                        print("onError: $error");
+                                      },
+                                      onCancel: (params) {
+                                        print('cancelled: $params');
+                                      }),
+                                ))
+                          },
+                      child: const Text("Make Payment")),
                 ],
               ),
             ],

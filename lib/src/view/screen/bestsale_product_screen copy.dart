@@ -17,17 +17,17 @@ import '../../const/app_colors.dart';
 import '../../viewmodel/whislist_viewmodel.dart';
 import 'component/hometab/cart_product.dart';
 
-class CategoryProductScreen extends StatefulWidget {
+class BestSalerProductScreen extends StatefulWidget {
   @override
-  _CategoryProductState createState() => _CategoryProductState();
+  _BestSalerProductState createState() => _BestSalerProductState();
 }
 
-class _CategoryProductState extends State<CategoryProductScreen> {
+class _BestSalerProductState extends State<BestSalerProductScreen> {
   final Stream<QuerySnapshot> collectionReferenceProduct =
       ProductService.readProduct();
 
-  final Stream<QuerySnapshot> getProductCategory =
-      UserService.readProductCategory(Get.arguments["name"]);
+  final Stream<QuerySnapshot> getProductBestSaller =
+      UserService.readProductBestSaller("bestsaller");
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class _CategoryProductState extends State<CategoryProductScreen> {
         backgroundColor: Colors.white,
         centerTitle: true,
         leading: IconButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => {Get.toNamed("/")},
           icon: Icon(
             Icons.arrow_back_ios,
             size: 20,
@@ -51,7 +51,7 @@ class _CategoryProductState extends State<CategoryProductScreen> {
           ),
         ),
         title: Text(
-          "${Get.arguments["name"]}",
+          "Best Saler",
           style: AppFont.semiBold.copyWith(
             fontWeight: FontWeight.bold,
           ),
@@ -72,7 +72,7 @@ class _CategoryProductState extends State<CategoryProductScreen> {
             SizedBox(
               height: 700,
               child: StreamBuilder(
-                stream: getProductCategory,
+                stream: getProductBestSaller,
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.hasData) {
@@ -267,11 +267,8 @@ class _CategoryProductState extends State<CategoryProductScreen> {
                     );
                   }
 
-                  return SizedBox(
-                    height: 100,
-                    child: Container(
-                      child: Text("null"),
-                    ),
+                  return Center(
+                    child: Text("Rỗng"),
                   );
                 },
               ),
