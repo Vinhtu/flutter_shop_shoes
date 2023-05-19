@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import '../../../models/Response.dart';
+import 'package:flutter_shop_shoes/src/data/model/Response.dart';
 
 final FirebaseFirestore db = FirebaseFirestore.instance;
 final CollectionReference _collection = db.collection('categories');

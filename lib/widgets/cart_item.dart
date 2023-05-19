@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:provider/provider.dart';
 
-import '../models/CartModel.dart';
 import '../src/viewmodel/cart_viewmodel.dart';
 
 class ACartItem extends StatelessWidget {

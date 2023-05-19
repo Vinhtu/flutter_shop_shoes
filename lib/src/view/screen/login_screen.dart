@@ -204,7 +204,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       if (getUser) {
                         loginData.addItems(emailController.text.toString());
-                        Get.toNamed("/");
+                        if (emailController.text.toString() ==
+                            "admin@gmail.com") {
+                          Get.toNamed("/dashboard-admin");
+                        } else {
+                          Get.toNamed("/");
+                        }
                       } else {
                         showDialog(
                             context: context,

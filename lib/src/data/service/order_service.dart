@@ -22,6 +22,8 @@ class OrderService {
     required String product,
     required String status,
     required CartViewModel cartviewmodel,
+    required String kind,
+    required String subpayment,
   }) async {
     Response response = Response();
     DocumentReference documentReferencer = _collection.doc();
@@ -39,6 +41,8 @@ class OrderService {
       'product': product,
       'orderitems': itemsData,
       'status': status,
+      'kind': kind,
+      'subpayment': subpayment,
     };
 
     var result = await documentReferencer.set(data).whenComplete(() {

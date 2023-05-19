@@ -4,11 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_shop_shoes/src/router/router_path.dart';
 import 'package:flutter_shop_shoes/src/view/screen/checkout_screen.dart';
 import 'package:flutter_shop_shoes/src/viewmodel/cart_viewmodel.dart';
-import 'package:flutter_shop_shoes/test/model/cart.dart';
 import 'package:page_transition/page_transition.dart';
 
-import '../../test/user/login_screen.dart';
-import '../../test/user/register_screen.dart';
 import '../data/model/product.dart';
 import '../view/screen/add_address_screen.dart';
 import '../view/screen/change_pass_screen.dart';
@@ -17,7 +14,6 @@ import '../view/screen/component/otp_screen.dart';
 import '../view/screen/detail_product_screen.dart';
 import '../view/screen/forgot_pass_screen.dart';
 import '../view/screen/my_order_screen.dart';
-import '../view/screen/order_detail_screen.dart';
 import '../view/screen/order_success_screen.dart';
 import '../view/screen/recent_view_screen.dart';
 import '../view/screen/splash_screen.dart';
@@ -52,10 +48,7 @@ class Routerr {
         ));
       case SplashScreens:
         return _generateMaterialRoute(SplashScreen());
-      case LoginScreens:
-        return _generateMaterialRoute(LoginScreen());
-      case RegisterScreens:
-        return _generateMaterialRoute(RegisterScreen());
+
       case ForgotPassScreens:
         return _generateMaterialRoute(ForgotPassScreen());
       case ChangePassScreens:

@@ -27,6 +27,14 @@ class _ChoiceAddressScreenState extends State<ChoiceAddressScreen> {
   final districtController = TextEditingController();
   final wardController = TextEditingController();
 
+  static const List<String> paymentOptions = [
+    'Thanh toán khi nhận hàng',
+    'Thanh toán bằng Paypal'
+  ];
+
+  // Define the currently selected payment option
+  String selectedOption = paymentOptions[0];
+
   @override
   Widget build(BuildContext context) {
     var userData = Provider.of<UserViewModel>(context);

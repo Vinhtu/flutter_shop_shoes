@@ -11,7 +11,7 @@ import 'package:flutter_shop_shoes/src/view/screen/all_product_screen.dart';
 import 'package:flutter_shop_shoes/src/view/screen/bestsale_product_screen%20copy.dart';
 import 'package:flutter_shop_shoes/src/view/screen/category_product_screen.dart';
 import 'package:flutter_shop_shoes/src/view/screen/choice_address_screen.dart';
-import 'package:flutter_shop_shoes/src/view/screen/dash_board_screen.dart';
+import 'package:flutter_shop_shoes/src/view/screen/dash_board_client_screen.dart';
 import 'package:flutter_shop_shoes/src/view/screen/detail_product_screen.dart';
 import 'package:flutter_shop_shoes/src/view/screen/edit_person_screen.dart';
 import 'package:flutter_shop_shoes/src/view/screen/home_tab.dart';
@@ -32,9 +32,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-import 'common_widget/AppBarWidget.dart';
-import 'common_widget/BottomNavBarWidget.dart';
-import 'common_widget/DrawerWidget.dart';
+import 'admin/admin/categories/add_category_screen.dart';
+import 'admin/admin/categories/category_list_screen.dart';
+import 'admin/admin/categories/edit_category_screen.dart';
+import 'admin/admin/dashboard_screen.dart';
+import 'admin/admin/home_page.dart';
+import 'admin/admin/products/add_product_screen.dart';
+import 'admin/admin/products/product_list_screen.dart';
+import 'admin/admin/users/user_list_screen.dart';
+
 import 'models/CartModel.dart';
 
 void main() async {
@@ -62,6 +68,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // var loginData = Provider.of<LoginViewModel>(context, listen: true);
+
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => BottomNavigationProvider()),
@@ -75,7 +83,15 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => AuthViewModel())
         ],
         child: GetMaterialApp(
-          home: DashBoardScreen(),
+          // home: LoginViewModel().itemCount <= 0
+          //     ? DashBoardClientScreen()
+          //     : LoginViewModel()?.items?.values?.toList()[0]?.username !=
+          //             "admin@gmail.com"
+          //         ? DashBoardClientScreen()
+          //         : DashboardScreen(),
+
+          home: DashBoardClientScreen(),
+
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             primarySwatch: Colors.blue,
@@ -85,7 +101,7 @@ class MyApp extends StatelessWidget {
             GetPage(name: '/product-detail', page: () => DetailProductScreen()),
             // GetPage(name: '/cart', page: () => ShoppingCartScreen()),
             GetPage(name: '/home', page: () => HomeTab()),
-            GetPage(name: '/', page: () => DashBoardScreen()),
+            GetPage(name: '/', page: () => DashBoardClientScreen()),
             GetPage(name: '/chooseaddress', page: () => ChoiceAddressScreen()),
             GetPage(name: '/register', page: () => RegisterScreen()),
 
@@ -98,12 +114,21 @@ class MyApp extends StatelessWidget {
 
             GetPage(
                 name: '/category-product', page: () => CategoryProductScreen()),
-
             GetPage(name: '/all-product', page: () => AllProductScreen()),
-
             GetPage(name: '/best-saller', page: () => BestSalerProductScreen()),
             GetPage(name: '/edit-person', page: () => EditPersonScreen()),
+            GetPage(name: '/', page: () => HomePageScreen()),
+            GetPage(
+                name: '/category/add', page: () => const AddCategoryScreen()),
+            GetPage(name: '/category/edit', page: () => EditCategoryScreen()),
+            GetPage(name: '/category', page: () => CategoryListScreen()),
+            GetPage(name: "/users", page: () => UserListScreen()),
+            GetPage(name: "/products", page: () => ProductListScreen()),
+            GetPage(name: '/products/add', page: () => AddProductScreen()),
+            GetPage(
+                name: "/products/details", page: () => DetailProductScreen()),
 
+            GetPage(name: "/dashboard-admin", page: () => DashboardScreen()),
             // Dynamic route
           ],
         ));
@@ -114,72 +139,4 @@ int currentIndex = 0;
 
 void navigateToScreens(int index) {
   currentIndex = index;
-}
-
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageNewState createState() => _MyHomePageNewState();
-}
-
-class _MyHomePageNewState extends State<MyHomePage> {
-  final List<Widget> viewContainer = [
-    HomeScreen(),
-    WishListScreen(),
-    ShoppingCartScreen(),
-    // HomeScreen()
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    void _onItemTapped(int index) {
-      setState(() {
-        currentIndex = index;
-        // navigateToScreens(index);
-      });
-    }
-
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: AppBarWidget(context),
-        drawer: DrawerWidget(),
-        body: IndexedStack(
-          index: currentIndex,
-          children: viewContainer,
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-              // label: Text(
-              //   'Home',
-              //   style: TextStyle(color: Color(0xFF545454)),
-              // ),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.heart),
-              label: 'Wish List',
-              // title: Text(
-              //   'Wish List',
-              //   style: TextStyle(color: Color(0xFF545454)),
-              // ),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.shoppingBag),
-              label: 'Cart',
-              // title: Text(
-              //   'Cart',
-              //   style: TextStyle(color: Color(0xFF545454)),
-              // ),
-            ),
-          ],
-          currentIndex: currentIndex,
-          selectedItemColor: Color(0xFFAA292E),
-          onTap: _onItemTapped,
-        ),
-      ),
-    );
-  }
 }

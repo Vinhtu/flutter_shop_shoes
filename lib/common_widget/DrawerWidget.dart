@@ -21,13 +21,13 @@ class _DrawerWidgetState extends State<DrawerWidget> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             _createDrawerHeader(),
-            _createDrawerItem(
-                icon: Icons.home,
-                text: 'Home',
-                onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => MyHomePage()),
-                    )),
+            // _createDrawerItem(
+            //     icon: Icons.home,
+            //     text: 'Home',
+            //     onTap: () => Navigator.push(
+            //           context,
+            //           MaterialPageRoute(builder: (context) => MyHomePage()),
+            //         )),
             _createDrawerItem(
                 icon: FontAwesomeIcons.user,
                 text: 'Sign In',

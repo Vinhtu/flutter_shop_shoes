@@ -14,9 +14,11 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:provider/provider.dart';
 
+import '../../../admin/admin/orders/components/order_card.dart';
 import '../../const/app_colors.dart';
 import '../../viewmodel/whislist_viewmodel.dart';
 import 'component/hometab/cart_product.dart';
+import 'order_card_client.dart';
 
 class ListOrderScreen extends StatefulWidget {
   @override
@@ -60,281 +62,42 @@ class _ListOrderState extends State<ListOrderScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // buildHeaderBody(title: "Sale", description: "Supper sale"),
-
-            SizedBox(
-              height: 20,
-            ),
-
-            SizedBox(
-              height: 700,
-              child: StreamBuilder(
-                stream: getOrders,
-                builder: (BuildContext context,
-                    AsyncSnapshot<QuerySnapshot> snapshot) {
-                  if (snapshot.hasData) {
-                    // return Container(
-                    //   child: Text("tset"),
-                    // );
-
-                    return GridView.count(
+        child: Flexible(
+          child: Padding(
+            padding: const EdgeInsets.all(0),
+            child: StreamBuilder(
+              stream: getOrders,
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasData) {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: ListView(
                       scrollDirection: Axis.vertical,
-                      crossAxisCount: 2,
-                      // padding: EdgeInsets.all(1.0),
-                      childAspectRatio: 1,
+                      shrinkWrap: true,
                       children: snapshot.data!.docs.map((e) {
-                        return Container(
-                          margin: const EdgeInsets.only(right: 15),
-                          child: GridTile(
-                            child: InkWell(
-                              onTap: () {
-                                // prductVM.addRecentView(e);
-                                // Navigator.pushNamed(context, DetailProductScreens,
-                                //     arguments: e);
-
-                                // Get.toNamed("/product-detail", arguments: {
-                                //   "id": e["id"],
-                                //   "name": e["name"],
-                                //   "thumbnail": e["thumbnail"],
-                                //   "thumbnail1": e["thumbnail1"],
-                                //   "thumbnail2": e["thumbnail2"],
-                                //   "thumbnail3": e["thumbnail3"],
-                                //   "price": e["price"],
-                                //   "color": e["color"],
-                                //   "size": e["size"],
-                                //   "description": e["description"],
-                                //   "promotion": e["promotion"],
-                                //   "amount": e["amount"],
-                                //   "brand": e["brand"],
-                                //   "category": e["category"]
-                                // });
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(8)),
-                                        border: Border.all(color: Colors.grey)),
-                                    width: double.infinity,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(0),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            height: 50,
-                                            decoration: const BoxDecoration(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(8)),
-                                              color: Colors.orange,
-                                            ),
-                                            child: Text(
-                                                "Code: ${snapshot.data!.docs[0].id}"),
-                                          ),
-
-                                          Text(
-                                            "Address: ${e["line"] + " - " + e["district"] + " - " + e["ward"]}",
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          SizedBox(
-                                            width: 25,
-                                          ),
-                                          Text(
-                                            "Phone: ${e["phone"]}",
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          SizedBox(
-                                            width: 25,
-                                          ),
-
-                                          Text(
-                                            "Total: ${e["total"]}",
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          SizedBox(
-                                            width: 25,
-                                          ),
-
-                                          Text(
-                                            "Product: ${e["product"]}",
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          SizedBox(
-                                            width: 25,
-                                          ),
-
-                                          Text(
-                                            "Status: ${e["status"]}",
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          // Stack(
-                                          //   children: [
-                                          //     // Padding(
-                                          //     //   padding: const EdgeInsets.only(
-                                          //     //       bottom: 10, right: 2),
-                                          //     //   child: ClipRRect(
-                                          //     //     borderRadius:
-                                          //     //         BorderRadius.circular(8),
-                                          //     //     child: Image.network(
-                                          //     //       e["thumbnail"],
-                                          //     //       fit: BoxFit.cover,
-                                          //     //       width: double.infinity,
-                                          //     //       height: 220,
-                                          //     //     ),
-                                          //     //   ),
-                                          //     // ),
-
-                                          //     Consumer<ProductViewModel>(
-                                          //       builder: (BuildContext context,
-                                          //           ProductViewModel value,
-                                          //           Widget? child) {
-                                          //         return Positioned(
-                                          //           right: 0,
-                                          //           bottom: 0,
-                                          //           child: InkWell(
-                                          //             onTap: () {
-                                          //               // wishlist.addItems(
-                                          //               //     e['name'],
-                                          //               //     e["id"],
-                                          //               //     int.parse(e['price'])
-                                          //               //         as double,
-                                          //               //     e['thumbnail'],
-                                          //               //     e['category']);
-                                          //             },
-                                          //             child: Container(
-                                          //                 width: 40,
-                                          //                 height: 40,
-                                          //                 decoration: BoxDecoration(
-                                          //                   color: Colors.white,
-                                          //                   shape: BoxShape.circle,
-                                          //                   boxShadow: [
-                                          //                     BoxShadow(
-                                          //                       color: Colors.grey
-                                          //                           .withOpacity(
-                                          //                               .2),
-                                          //                       offset:
-                                          //                           Offset(1, 1),
-                                          //                       spreadRadius: 1,
-                                          //                     ),
-                                          //                   ],
-                                          //                 ),
-                                          //                 child: Icon(
-                                          //                   Icons.favorite,
-                                          //                   // : Icons
-                                          //                   //     .favorite_border,
-                                          //                   color:
-                                          //                       // ? AppColors
-                                          //                       //     .primaryColorRed
-                                          //                       AppColors
-                                          //                           .primaryColorGray,
-                                          //                   size: 19,
-                                          //                 )),
-                                          //           ),
-                                          //         );
-                                          //       },
-                                          //     )
-                                          //   ],
-                                          // ),
-                                          // Row(
-                                          //   children: [
-                                          //     RatingBar.builder(
-                                          //       initialRating: 5,
-                                          //       direction: Axis.horizontal,
-                                          //       itemSize: 15,
-                                          //       itemCount: 5,
-                                          //       ignoreGestures: true,
-                                          //       itemBuilder: (context, _) => Icon(
-                                          //         Icons.star,
-                                          //         color: Colors.amber,
-                                          //       ),
-                                          //       onRatingUpdate: (rating) {
-                                          //         print(rating);
-                                          //       },
-                                          //     ),
-                                          //     SizedBox(
-                                          //       width: 5,
-                                          //     ),
-                                          //     Text('(10)')
-                                          //   ],
-                                          // ),
-                                          // SizedBox(
-                                          //   height: 5,
-                                          // ),
-                                          // Text(
-                                          //   e["category"],
-                                          //   style: AppFont.regular.copyWith(
-                                          //     fontSize: 13,
-                                          //     color: Colors.grey,
-                                          //     fontWeight: FontWeight.normal,
-                                          //   ),
-                                          // ),
-                                          // SizedBox(
-                                          //   height: 8,
-                                          // ),
-                                          // Text(
-                                          //   e["name"],
-                                          //   style: AppFont.bold.copyWith(
-                                          //     fontSize: 17,
-                                          //   ),
-                                          // ),
-                                          // SizedBox(
-                                          //   height: 8,
-                                          // ),
-                                          // Text(
-                                          //   e["price"],
-                                          //   style: AppFont.bold.copyWith(
-                                          //       fontSize: 14,
-                                          //       color: AppColors.primaryColorRed),
-                                          // ),
-                                        ],
-                                      ),
-                                    )),
-                              ),
-                            ),
-
-                            // GridTilesProducts(
-                            //     data: e,
-                            //     name: e["name"],
-                            //     imageUrl: e["thumbnail"].toString(),
-                            //     slug: e["name"],
-                            //     price: e["price"])
-                          ),
+                        final data = e.data() as Map<String, dynamic>;
+                        final orderitems = data.containsKey('orderitems')
+                            ? data['orderitems'] as List<dynamic>
+                            : [];
+                        final thumbnail = orderitems.isNotEmpty
+                            ? orderitems[0]['thumbnail'] as String
+                            : '';
+                        return OrderCardClient(
+                          status: data['status'],
+                          total: data['total'],
+                          id: e.id,
+                          thumbnail: thumbnail,
+                          product: data['product'],
                         );
                       }).toList(),
-                    );
-                  }
-
-                  return SizedBox(
-                    height: 100,
-                    child: Container(
-                      child: Text("null"),
                     ),
                   );
-                },
-              ),
+                }
+                return Container();
+              },
             ),
-            SizedBox(
-              height: 30,
-            ),
-          ],
+          ),
         ),
       ),
     );

@@ -246,10 +246,10 @@ class _AppSignInState extends State<AppSignIn> {
             email: emailcontroller.text, password: passwordcontroller.text);
         // ignore: unnecessary_null_comparison
         if (user != null) {
-          Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (BuildContext context) {
-            return MyHomePage();
-          }), (route) => false);
+          // Navigator.of(context).pushAndRemoveUntil(
+          //     MaterialPageRoute(builder: (BuildContext context) {
+          //   return MyHomePage();
+          // }), (route) => false);
         } else {
           return showDialog(
               context: context,

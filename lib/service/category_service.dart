@@ -32,6 +32,7 @@ class CategoryService {
   static Future<Response> updateCategory({
     required String name,
     required String docId,
+    required String image,
   }) async {
     Response response = Response();
     DocumentReference documentReferencer = _collection.doc(docId);
