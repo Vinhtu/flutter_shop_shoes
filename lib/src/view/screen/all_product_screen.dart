@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_shop_shoes/src/viewmodel/user_viewmodel.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../const/app_colors.dart';
@@ -25,6 +26,9 @@ class AllProductScreen extends StatefulWidget {
 class _AllProductState extends State<AllProductScreen> {
   final Stream<QuerySnapshot> collectionReferenceProduct =
       ProductService.readProduct();
+
+  final NumberFormat currencyFormat =
+      NumberFormat.currency(locale: "vi_VN", symbol: "VND");
 
   @override
   Widget build(BuildContext context) {
@@ -243,7 +247,8 @@ class _AllProductState extends State<AllProductScreen> {
                                         height: 8,
                                       ),
                                       Text(
-                                        e["price"],
+                                        currencyFormat
+                                            .format(int.parse(e["price"])),
                                         style: AppFont.bold.copyWith(
                                             fontSize: 14,
                                             color: AppColors.primaryColorRed),

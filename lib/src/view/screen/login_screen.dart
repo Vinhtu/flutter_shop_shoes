@@ -212,8 +212,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         final Map<String, dynamic> e =
                             userNotes[0].data() as Map<String, dynamic>;
 
-                        print(userNotes[0].id);
-
                         userData.addItems(
                             e["id"],
                             e["name"],

@@ -5,6 +5,7 @@ import 'package:flutter_shop_shoes/src/viewmodel/cart_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../const/app_colors.dart';
@@ -30,6 +31,8 @@ class _CartTabState extends State<CartTab> {
   ];
 
   String selectedOption = paymentOptions[0];
+  final NumberFormat currencyFormat =
+      NumberFormat.currency(locale: "vi_VN", symbol: "VND");
 
   @override
   Widget build(BuildContext context) {
@@ -157,7 +160,8 @@ class _CartTabState extends State<CartTab> {
                           const Spacer(),
                           Chip(
                             label: Text(
-                              cartData.totalPrice.toString(), // text value
+                              currencyFormat
+                                  .format(cartData.totalPrice.toInt()),
                               style: TextStyle(
                                 color: Theme.of(context)
                                     .primaryTextTheme
@@ -310,7 +314,7 @@ class _CartTabState extends State<CartTab> {
                                         children: [
                                           Container(
                                             child: Text(
-                                                "x ${cartData.items.values.toList()[index].quantity}    ${cartData.items.values.toList()[index].price.toInt() * cartData.items.values.toList()[index].quantity.toInt()}"),
+                                                "x ${cartData.items.values.toList()[index].quantity}     ${currencyFormat.format(cartData.items.values.toList()[index].price.toInt() * cartData.items.values.toList()[index].quantity.toInt())}"),
                                           ),
                                           Container(
                                             child: Row(children: [
@@ -434,7 +438,7 @@ class _CartTabState extends State<CartTab> {
                         ),
                       ),
                       Text(
-                        "${cartData.totalPrice.toInt()} VND",
+                        currencyFormat.format(cartData.totalPrice.toInt()),
                         style: AppFont.semiBold.copyWith(
                             fontSize: 17, fontWeight: FontWeight.w600),
                       ),

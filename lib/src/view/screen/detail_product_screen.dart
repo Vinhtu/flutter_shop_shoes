@@ -18,6 +18,7 @@ import 'package:flutter_shop_shoes/src/viewmodel/user_viewmodel.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class DetailProductScreen extends StatefulWidget {
@@ -36,6 +37,9 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
     'https://thevou.com/wp-content/uploads/2021/05/Current-fashion-trends-wtvox.com-Boiler-suits-01.jpg',
   ];
   Inventory? inventory = Inventory();
+
+  final NumberFormat currencyFormat =
+      NumberFormat.currency(locale: "vi_VN", symbol: "VND");
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +141,8 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                           ),
                         ),
                         Text(
-                          "${Get.arguments['price']}",
+                          currencyFormat
+                              .format(int.parse(Get.arguments['price'])),
                           style: AppFont.bold.copyWith(fontSize: 23),
                         ),
                       ],

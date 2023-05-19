@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_shop_shoes/src/viewmodel/user_viewmodel.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../service/product_service.dart';
@@ -30,6 +31,9 @@ class _BodyPageState extends State<BodyPage> {
   final Stream<QuerySnapshot> getProductBestSaller =
       UserService.readProductBestSaller("bestsaller");
 
+  final NumberFormat currencyFormat =
+      NumberFormat.currency(locale: "vi_VN", symbol: "VND");
+
   @override
   Widget build(BuildContext context) {
     final wishlist = Provider.of<WishListViewModel>(context, listen: false);
@@ -42,7 +46,6 @@ class _BodyPageState extends State<BodyPage> {
     ProductViewModel prductVM = Provider.of(context, listen: false);
     double cardWidth = ((MediaQuery.of(context).size.width - 40) / 2);
     var userData = Provider.of<UserViewModel>(context, listen: true);
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
@@ -273,7 +276,8 @@ class _BodyPageState extends State<BodyPage> {
                                       height: 8,
                                     ),
                                     Text(
-                                      e["price"],
+                                      currencyFormat
+                                          .format(int.parse(e["price"])),
                                       style: AppFont.bold.copyWith(
                                           fontSize: 14,
                                           color: AppColors.primaryColorRed),
@@ -534,7 +538,8 @@ class _BodyPageState extends State<BodyPage> {
                                         height: 8,
                                       ),
                                       Text(
-                                        e["price"],
+                                        currencyFormat
+                                            .format(int.parse(e["price"])),
                                         style: AppFont.bold.copyWith(
                                             fontSize: 14,
                                             color: AppColors.primaryColorRed),
