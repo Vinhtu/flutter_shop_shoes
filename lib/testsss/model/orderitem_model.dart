@@ -1,7 +1,4 @@
-import 'package:flutter_shop_shoes/test/model/product_model.dart';
-
-import 'account_model.dart';
-import 'note_model.dart';
+import '../../models/ProductModel.dart';
 
 class OrderitemModel {
   final String id;

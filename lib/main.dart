@@ -3,9 +3,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_shop_shoes/screens/HomeScreen.dart';
-import 'package:flutter_shop_shoes/screens/ShoppingCartScreen.dart';
-import 'package:flutter_shop_shoes/screens/WishListScreen.dart';
+
 import 'package:flutter_shop_shoes/src/router/routerr.dart';
 import 'package:flutter_shop_shoes/src/view/screen/all_product_screen.dart';
 import 'package:flutter_shop_shoes/src/view/screen/bestsale_product_screen%20copy.dart';

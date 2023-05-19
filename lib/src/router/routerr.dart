@@ -13,7 +13,6 @@ import '../view/screen/choice_address_screen.dart';
 import '../view/screen/component/otp_screen.dart';
 import '../view/screen/detail_product_screen.dart';
 import '../view/screen/forgot_pass_screen.dart';
-import '../view/screen/my_order_screen.dart';
 import '../view/screen/order_success_screen.dart';
 import '../view/screen/recent_view_screen.dart';
 import '../view/screen/splash_screen.dart';
@@ -34,8 +33,7 @@ class Routerr {
         return _generateMaterialRoute(AddAddressScreen());
       case OrderSuccessScreens:
         return _generateMaterialRoute(OrderSuccessScreen());
-      case MyOrderScreens:
-        return _generateMaterialRoute(MyOrderScreen());
+
       // case OrderDetailScreens:
       //   final arg = settings.arguments! as Order;
       //   return _generateMaterialRoute(OrderDetailScreen(
