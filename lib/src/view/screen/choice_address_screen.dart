@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_shop_shoes/src/const/app_colors.dart';
 import 'package:flutter_shop_shoes/src/const/app_font.dart';
 import 'package:flutter_shop_shoes/src/data/model/address.dart';
@@ -228,16 +229,24 @@ class _ChoiceAddressScreenState extends State<ChoiceAddressScreen> {
                   );
                 });
           } else {
+            final List<QueryDocumentSnapshot> userNotes = await UserService()
+                .getUserUsername(
+                    userData.items.values.toList()[0].username.toString());
+
+            final Map<String, dynamic> e =
+                userNotes[0].data() as Map<String, dynamic>;
+
             userData.addItems(
-                userData.items.values.toList()[0].id,
-                userData.items.values.toList()[0].name,
-                userData.items.values.toList()[0].username,
-                userData.items.values.toList()[0].password,
-                phoneController.text.toString(),
-                lineController.text.toString(),
-                districtController.text.toString(),
-                wardController.text.toString(),
-                userData.items.values.toList()[0].uid);
+                e["id"],
+                e["name"],
+                e["username"],
+                e["password"],
+                e["phone"],
+                e["line"],
+                e["district"],
+                e["ward"],
+                userNotes[0].id);
+
             showDialog(
                 context: context,
                 builder: (context) {
@@ -246,7 +255,7 @@ class _ChoiceAddressScreenState extends State<ChoiceAddressScreen> {
                   );
                 });
 
-            Get.toNamed("/");
+            // Get.toNamed("/");
           }
         },
         backgroundColor: Colors.black,

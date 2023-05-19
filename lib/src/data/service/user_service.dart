@@ -157,6 +157,16 @@ class UserService {
     return notesItemCollection.snapshots();
   }
 
+  Future<List<QueryDocumentSnapshot>> getUserUsername(String username) async {
+    final Query<Object?> notesItemCollection =
+        db.collection('users').where("username", isEqualTo: username);
+
+    final QuerySnapshot querySnapshot = await notesItemCollection.get();
+    final List<QueryDocumentSnapshot> documentSnapshots = querySnapshot.docs;
+
+    return documentSnapshots;
+  }
+
   static Future<bool> userExists(username, password) async {
     return await db
         .collection('users')

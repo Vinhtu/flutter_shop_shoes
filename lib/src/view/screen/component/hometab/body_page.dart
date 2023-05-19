@@ -565,57 +565,6 @@ class _BodyPageState extends State<BodyPage> {
               },
             ),
           ),
-          SizedBox(
-            height: cardWidth / 0.59,
-            child: StreamBuilder(
-              stream: UserService.readUser(
-                  loginData.items.values.toList().length > 0
-                      ? loginData.items.values.toList()[0].username
-                      : "text"),
-              builder: (BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (snapshot.hasData &&
-                    loginData.items.values.toList().length > 0) {
-                  return GridView.count(
-                    scrollDirection: Axis.horizontal,
-                    crossAxisCount: 1,
-                    // padding: EdgeInsets.all(1.0),
-                    childAspectRatio: 2 / 1,
-                    children: snapshot.data!.docs.map((e) {
-                      // print(e["id"]);
-                      // print(e["name"]);
-                      // print(e["username"]);
-                      // print(e["password"]);
-                      // print(e["phone"]);
-                      // print(e["line"]);
-                      // print(e["district"]);
-                      // print(e["ward"]);
-                      userData.addItems(
-                          e["id"],
-                          e["name"],
-                          e["username"],
-                          e["password"],
-                          e["phone"],
-                          e["line"],
-                          e["district"],
-                          e["ward"],
-                          snapshot.data!.docs[0].id);
-                      return Container(
-                        child: Text(""),
-                      );
-                    }).toList(),
-                  );
-                }
-
-                return SizedBox(
-                  height: 100,
-                  child: Container(
-                    child: const Text(""),
-                  ),
-                );
-              },
-            ),
-          )
         ],
       ),
     );

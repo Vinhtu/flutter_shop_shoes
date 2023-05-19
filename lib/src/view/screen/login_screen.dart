@@ -1,6 +1,8 @@
 // ignore_for_file: avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_shop_shoes/service/product_service.dart';
 import 'package:flutter_shop_shoes/src/const/app_colors.dart';
 import 'package:flutter_shop_shoes/src/const/app_font.dart';
 import 'package:flutter_shop_shoes/src/data/service/user_service.dart';
@@ -203,6 +205,26 @@ class _LoginScreenState extends State<LoginScreen> {
                       print(getUser);
 
                       if (getUser) {
+                        final List<QueryDocumentSnapshot> userNotes =
+                            await UserService().getUserUsername(
+                                emailController.text.toString());
+
+                        final Map<String, dynamic> e =
+                            userNotes[0].data() as Map<String, dynamic>;
+
+                        print(userNotes[0].id);
+
+                        userData.addItems(
+                            e["id"],
+                            e["name"],
+                            e["username"],
+                            e["password"],
+                            e["phone"],
+                            e["line"],
+                            e["district"],
+                            e["ward"],
+                            userNotes[0].id);
+
                         loginData.addItems(emailController.text.toString());
                         if (emailController.text.toString() ==
                             "admin@gmail.com") {

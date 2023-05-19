@@ -109,4 +109,14 @@ class ProductService {
 
     return notesItemCollection.snapshots();
   }
+
+  Future<List<QueryDocumentSnapshot>> getUserUsername(String username) async {
+    final Query<Object?> notesItemCollection =
+        _collection.where("username", isEqualTo: username);
+
+    final QuerySnapshot querySnapshot = await notesItemCollection.get();
+    final List<QueryDocumentSnapshot> documentSnapshots = querySnapshot.docs;
+
+    return documentSnapshots;
+  }
 }
